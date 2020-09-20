@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc $(CFLAGS) -c $(SRCS) $(INCS)
+	gcc $(CFLAGS) -g -c $(SRCS) $(INCS)
 	gcc $(CFLAGS) $(INCS) $(OBJS) $(LIB) -o $(NAME)
 
 .PHONY: clean fclean re all
