@@ -1,7 +1,7 @@
 #include "filler.h"
 #include <stdio.h>
 
-static char		*get_piece(t_piece *piece, char *pieceline, int fd)
+static int get_piece(t_piece *piece, char *pieceline, int fd)
 {
 	int		nb;
 	char	*line;
@@ -18,15 +18,16 @@ static char		*get_piece(t_piece *piece, char *pieceline, int fd)
 	free(res[1]);
 	free(res);
 	if (!(piece->piece = (char**)malloc(sizeof(char*) * piece->y + 1)))
-	{
 		return (0);
-	}
 	ft_putstr_fd("piece y:", 2);
 	ft_putnbr_fd(piece->y, 2);
 	ft_putchar_fd('\n', 2);
 	ft_putstr_fd("piece x:", 2);
 	ft_putnbr_fd(piece->x, 2);
 	ft_putchar_fd('\n', 2);
+	ft_putstr_fd(line, 2);
+	ft_putnbr_fd(fd, 2);
+	/*
 	while (get_next_line(fd, &line) == 1)
 	{
 		ft_putstr_fd("IN GNL AT GETPIECE\n", 2);
@@ -36,17 +37,18 @@ static char		*get_piece(t_piece *piece, char *pieceline, int fd)
 			nb++;
 			ft_putstr_fd("IN LINE AT GETPIECE\n", 2);
 		}
-		ft_strdel(&line);
+	//	ft_strdel(&line);
 		if (nb == piece->y)
 			break ;
 	}
 	piece->piece[nb] = NULL;
+	*/
 	// while (*piece->piece != NULL)
 	// {
 	// 	printf("piece: %s\n", *piece->piece);
 	// 	piece->piece++;
 	// }
-	return (line);
+	return (1);
 }
 
 static char	*get_map(t_map *map, char *mapline, int fd)
@@ -70,8 +72,8 @@ static char	*get_map(t_map *map, char *mapline, int fd)
 	if (!(map->map = (char**)malloc(sizeof(char*) * map->x + 1)))
 		return (0);
 	get_next_line(fd, &line);
-	ft_strdel(&line);
-	while (get_next_line(fd, &line) == 1 && ft_strstr(line, "Piece") != NULL)
+	// ft_strdel(&line);
+	while (ft_strstr(line, "Piece") == NULL && get_next_line(fd, &line) == 1)
 	{
 		ft_putstr_fd("IN GNL AT GETMAP\n", 2);
 		if (line)
@@ -97,10 +99,9 @@ static char	*get_map(t_map *map, char *mapline, int fd)
 				map->p2_x = y - 4;
 				y = 0;	
 			}
-			nb++;
-			
+			nb++;	
 		}
-		ft_strdel(&line);
+		//ft_strdel(&line);
 	}
 	map->map[nb] = NULL;
 	// while (*map->map != NULL)
@@ -115,7 +116,7 @@ static char	*get_map(t_map *map, char *mapline, int fd)
 	return (line);
 }
 
-static char		*get_player(t_players *players , char *line)
+static int get_player(t_players *players , char *line)
 {
 	if (!line || (line[10] != '1' && line[10] != '2'))
 		return (0);
@@ -124,7 +125,7 @@ static char		*get_player(t_players *players , char *line)
 	else
 		players->playernum = 2;	
 	// printf("playernum: %d\n", players->playernum);
-	return(line);
+	return(1);
 }
 
 int		main(int argc, char **argv) // only for debugging with a file
@@ -154,13 +155,14 @@ int		main(int argc, char **argv) // only for debugging with a file
 		ft_putstr_fd(line, 2);
 		ft_putchar_fd('\n', 2);
 		if (line && ft_strstr(line, "$$$"))
-			line = get_player(players, line);
-		else if (line && ft_strstr(line, "Plateau"))
+			get_player(players, line);
+		if (line && ft_strstr(line, "Plateau"))
 			line = get_map(map, line, fd);
-		else if (line && ft_strstr(line, "Piece"))
-			line = get_piece(piece, line, fd);
-		else
-			break ;
+		if (line && ft_strstr(line, "Piece"))
+		{
+			if (get_piece(piece, line, fd) == 1)
+				break ;
+		}
 		ft_putstr_fd("line after statements:", 2);
 		ft_putstr_fd(line, 2);
 		ft_putchar_fd('\n', 2);
@@ -171,7 +173,6 @@ int		main(int argc, char **argv) // only for debugging with a file
 	ft_putchar('\n');
 	ft_putnbr_fd(map->p1_y, 2);
 	ft_putnbr_fd(map->p1_x, 2);
-	ft_putstr_fd("HERHERHEHREEE", 2);
 	//coordinates = heatmap(map, piece, players);
 	free(map);
 	free(piece);
