@@ -1,7 +1,7 @@
 #include "filler.h"
 #include <stdio.h>
 
-static int		get_piece(t_piece *piece, char *pieceline, int fd)
+static char		*get_piece(t_piece *piece, char *pieceline, int fd)
 {
 	int		nb;
 	char	*line;
@@ -9,7 +9,7 @@ static int		get_piece(t_piece *piece, char *pieceline, int fd)
 
 	nb = 0;
 	if (!(res = ft_strsplit(&pieceline[5], ' ')))
-		return (1);
+		return (0);
 	piece->y = ft_atoi(res[0]);
 	piece->x = ft_atoi(res[1]);
 	// printf("y: %d\n", piece->y);
@@ -19,11 +19,14 @@ static int		get_piece(t_piece *piece, char *pieceline, int fd)
 	free(res);
 	if (!(piece->piece = (char**)malloc(sizeof(char*) * piece->y + 1)))
 	{
-		ft_putstr_fd("Did not malloc piece\n", 2);
-		return (1);
+		return (0);
 	}
-	ft_putnbr_fd(piece->x, 2);
+	ft_putstr_fd("piece y:", 2);
 	ft_putnbr_fd(piece->y, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putstr_fd("piece x:", 2);
+	ft_putnbr_fd(piece->x, 2);
+	ft_putchar_fd('\n', 2);
 	while (get_next_line(fd, &line) == 1)
 	{
 		ft_putstr_fd("IN GNL AT GETPIECE\n", 2);
@@ -43,10 +46,10 @@ static int		get_piece(t_piece *piece, char *pieceline, int fd)
 	// 	printf("piece: %s\n", *piece->piece);
 	// 	piece->piece++;
 	// }
-	return (0);
+	return (line);
 }
 
-static int	get_map(t_map *map, char *mapline, int fd)
+static char	*get_map(t_map *map, char *mapline, int fd)
 {
 	int		nb;
 	int 	y;
@@ -56,7 +59,7 @@ static int	get_map(t_map *map, char *mapline, int fd)
 	nb = 0;
 	y = 0;
 	if (!(res = ft_strsplit(&mapline[7], ' ')))
-		return (1);
+		return (0);
 	map->y = ft_atoi(res[0]);
 	map->x = ft_atoi(res[1]);
 	// printf("y: %d\n", map->y);
@@ -65,10 +68,10 @@ static int	get_map(t_map *map, char *mapline, int fd)
 	free(res[1]);
 	free(res);
 	if (!(map->map = (char**)malloc(sizeof(char*) * map->x + 1)))
-		return (1);
+		return (0);
 	get_next_line(fd, &line);
 	ft_strdel(&line);
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line) == 1 && ft_strstr(line, "Piece") != NULL)
 	{
 		ft_putstr_fd("IN GNL AT GETMAP\n", 2);
 		if (line)
@@ -109,20 +112,19 @@ static int	get_map(t_map *map, char *mapline, int fd)
 	// printf("p1_x: %d\n", map->p1_x);
 	// printf("p2_y: %d\n", map->p2_y);
 	// printf("p2_x: %d\n", map->p2_x);
-	return (0);
+	return (line);
 }
 
-static int		get_player(t_players *players , char *line)
+static char		*get_player(t_players *players , char *line)
 {
 	if (!line || (line[10] != '1' && line[10] != '2'))
-		return (1);
+		return (0);
 	if (line[10] - '0' == 1)
 		players->playernum = 1;
 	else
 		players->playernum = 2;	
 	// printf("playernum: %d\n", players->playernum);
-	ft_strdel(&line);
-	return(0);
+	return(line);
 }
 
 int		main(int argc, char **argv) // only for debugging with a file
@@ -152,25 +154,13 @@ int		main(int argc, char **argv) // only for debugging with a file
 		ft_putstr_fd(line, 2);
 		ft_putchar_fd('\n', 2);
 		if (line && ft_strstr(line, "$$$"))
-		{
-			ft_putstr_fd("GOTPLAYER\n", 2);
-			if (get_player(players, line) == 1)
-				return (0);
-		}
+			line = get_player(players, line);
 		else if (line && ft_strstr(line, "Plateau"))
-		{
-			ft_putstr_fd("GOTMAP\n", 2);
-			if (get_map(map, line, fd) == 1)
-				return (0);
-		}
+			line = get_map(map, line, fd);
 		else if (line && ft_strstr(line, "Piece"))
-		{
-			ft_putstr_fd("GOTPIECE\n", 2);
-			if (get_piece(piece, line, fd) == 1)
-				return (0);
-		}
+			line = get_piece(piece, line, fd);
 		else
-			ft_strdel(&line);
+			break ;
 		ft_putstr_fd("line after statements:", 2);
 		ft_putstr_fd(line, 2);
 		ft_putchar_fd('\n', 2);
