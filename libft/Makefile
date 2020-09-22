@@ -6,7 +6,7 @@
 #    By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/24 10:08:13 by malasalm          #+#    #+#              #
-#    Updated: 2020/09/06 19:25:01 by Melissa          ###   ########.fr        #
+#    Updated: 2020/09/21 17:44:44 by Melissa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ all: $(NAME)
 $(NAME):
 	gcc -c -I $(HEADER) -Wall -Wextra -Werror $(SRCS)
 	ar rc $(NAME) $(OBJECTS)
+	make clean
 
 clean:
 	@rm -f $(OBJECTS)

@@ -3,33 +3,23 @@
 #include "libft/libft.h"
 #include <fcntl.h>
 
-typedef struct	s_coordinates
-{
-	int	x;
-	int	y;
-}				t_coordinates;
-
-typedef struct		s_map
-{
-	char **map;
-	int	x;
-	int	y;
-	int p1_x;
-	int p1_y;
-	int p2_x;
-	int p2_y;
-}					t_map;
-
-typedef struct		s_piece
-{
-	char **piece;
-	int	x;
-	int	y;
-}					t_piece;
-
-typedef struct		s_players
+typedef struct		s_filler
 {
 	int playernum;
-}					t_players;
+	char **map;
+	char **newmap;
+	int	map_y;
+	int map_x;
+	int p1_y;
+	int p1_x;
+	int p2_y;
+	int p2_x;
+	char **piece;
+	int	piece_y;
+	int	piece_x;
+}					t_filler;
+
+// void construct_map(t_filler *map);
+// void return_coordnates(t_filler *map);
 
 #endif

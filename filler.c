@@ -1,7 +1,7 @@
 #include "filler.h"
 #include <stdio.h>
 
-static int get_piece(t_piece *piece, char *pieceline, int fd)
+static int get_piece(t_filler *data, char *pieceline, int fd)
 {
 	int		nb;
 	char	*line;
@@ -10,35 +10,35 @@ static int get_piece(t_piece *piece, char *pieceline, int fd)
 	nb = 0;
 	if (!(res = ft_strsplit(&pieceline[5], ' ')))
 		return (0);
-	piece->y = ft_atoi(res[0]);
-	piece->x = ft_atoi(res[1]);
-	printf("y: %d\n", piece->y);
-	printf("x: %d\n", piece->x);
+	data->piece_y = ft_atoi(res[0]);
+	data->piece_x = ft_atoi(res[1]);
+	printf("piece_y: %d\n", data->piece_y);
+	printf("piece_x: %d\n", data->piece_x);
 	free(res[0]);
 	free(res[1]);
 	free(res);
-	if (!(piece->piece = (char**)malloc(sizeof(char*) * piece->y + 1)))
+	if (!(data->piece = (char**)malloc(sizeof(char*) * data->piece_y + 1)))
 		return (0);
-	while (nb < piece->y && get_next_line(fd, &line) == 1)
+	while (nb < data->piece_y && get_next_line(fd, &line) == 1)
 	{
 		if (line)
 		{
-			piece->piece[nb] = ft_strdup(line);
+			data->piece[nb] = ft_strdup(line);
 			nb++;
 		}
-		if (nb == piece->y)
+		if (nb == data->piece_y)
 			break ;
 	}
-	piece->piece[nb] = NULL;
-	while (*piece->piece != NULL)
+	data->piece[nb] = NULL;
+	while (*data->piece != NULL)
 	{
-		printf("piece: %s\n", *piece->piece);
-		piece->piece++;
+		printf("piece: %s\n", *data->piece);
+		data->piece++;
 	}
 	return (1);
 }
 
-static char	*get_map(t_map *map, char *mapline, int fd)
+static char	*get_map(t_filler *data, char *mapline, int fd)
 {
 	int		nb;
 	int 	y;
@@ -49,73 +49,70 @@ static char	*get_map(t_map *map, char *mapline, int fd)
 	y = 0;
 	if (!(res = ft_strsplit(&mapline[7], ' ')))
 		return (0);
-	map->y = ft_atoi(res[0]);
-	map->x = ft_atoi(res[1]);
-	printf("y: %d\n", map->y);
-	printf("x: %d\n", map->x);
+	data->map_y = ft_atoi(res[0]);
+	data->map_x = ft_atoi(res[1]);
+	printf("map_y: %d\n", data->map_y);
+	printf("map_x: %d\n", data->map_x);
 	free(res[0]);
 	free(res[1]);
 	free(res);
-	if (!(map->map = (char**)malloc(sizeof(char*) * map->x + 1)))
+	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_x + 1)))
 		return (0);
 	get_next_line(fd, &line);
 	while (ft_strstr(line, "Piece") == NULL && get_next_line(fd, &line) == 1)
 	{
 		if (line)
 		{	
-			if (nb == map->y)
+			if (nb == data->map_y)
 				break ;
-			map->map[nb] = ft_strdup(&line[4]);
+			data->map[nb] = ft_strdup(&line[4]);
 			if (ft_strstr(line, "O"))
 			{
-				map->p1_y = ft_atoi(line);
+				data->p1_y = ft_atoi(line);
 				while (line[y] != 'O')
 					y++;
-				map->p1_x = y - 4;
+				data->p1_x = y - 4;
 				y = 0;
 			}
 			if (ft_strstr(line, "X"))
 			{
-				map->p2_y = ft_atoi(line);
+				data->p2_y = ft_atoi(line);
 				while (line[y] != 'X')
 					y++;
-				map->p2_x = y - 4;
+				data->p2_x = y - 4;
 				y = 0;	
 			}
 			nb++;	
 		}
 	}
-	map->map[nb] = NULL;
-	while (*map->map != NULL)
+	data->map[nb] = NULL;
+	while (*data->map != NULL)
 	{
-		printf("map: %s\n", *map->map);
-		map->map++;
+		printf("map: %s\n", *data->map);
+		data->map++;
 	}
-	printf("p1_y: %d\n", map->p1_y);
-	printf("p1_x: %d\n", map->p1_x);
-	printf("p2_y: %d\n", map->p2_y);
-	printf("p2_x: %d\n", map->p2_x);
+	printf("p1_y: %d\n", data->p1_y);
+	printf("p1_x: %d\n", data->p1_x);
+	printf("p2_y: %d\n", data->p2_y);
+	printf("p2_x: %d\n", data->p2_x);
 	return (line);
 }
 
-static int get_player(t_players *players , char *line)
+static int get_player(t_filler *data , char *line)
 {
 	if (!line || (line[10] != '1' && line[10] != '2'))
 		return (0);
 	if (line[10] - '0' == 1)
-		players->playernum = 1;
+		data->playernum = 1;
 	else
-		players->playernum = 2;	
-	printf("playernum: %d\n", players->playernum);
+		data->playernum = 2;	
+	printf("playernum: %d\n", data->playernum);
 	return(1);
 }
 
 int		main(int argc, char **argv) // only for debugging with a file
 {
-	t_map *map;
-	t_piece	*piece;
-	t_players *players;
-	//t_coordinates *coordinates;
+	t_filler *data;
 	char *line;
 	int fd;
 	int fd2; // only for debugging using a file
@@ -123,42 +120,24 @@ int		main(int argc, char **argv) // only for debugging with a file
 	argc = 0; // only for debugging + unsused argc
 	fd2 = open(argv[1], O_RDONLY); //only for debugging + unused argv
 	fd = 0;
-	if (!(map = (t_map *)malloc(sizeof(t_map))))
-		return (0);
-	if (!(piece = (t_piece *)malloc(sizeof(t_piece))))
-		return (0);
-	if (!(players = (t_players *)malloc(sizeof(t_players))))
-		return (0);
-	//if (!(coordinates = (t_coordinates *)malloc(sizeof(t_coordinates))))
-	//	return (0);
 	while (get_next_line(fd2, &line) == 1)
 	{
-		// ft_putstr_fd("line before statements:", 2);
-		// ft_putstr_fd(line, 2);
-		// ft_putchar_fd('\n', 2);
+		if (!(data = (t_filler *)malloc(sizeof(t_filler))))
+			return (0);
 		if (line && ft_strstr(line, "$$$"))
 		{
-			if (get_player(players, line) == 0)
+			if (get_player(data, line) == 0)
 				break ;
 		}
 		if (line && ft_strstr(line, "Plateau"))
-			line = get_map(map, line, fd2);
+			line = get_map(data, line, fd2);
 		if (line && ft_strstr(line, "Piece"))
 		{
-			if (get_piece(piece, line, fd2) == 1)
+			if (get_piece(data, line, fd2) == 1)
 				break ;
 		}
-		// ft_putstr_fd("line after statements:", 2);
-		// ft_putstr_fd(line, 2);
-		// ft_putchar_fd('\n', 2);
+		construct_map(data);
+		free(data);
 	}
-	ft_putnbr(map->p1_y);
-	ft_putchar(' ');
-	ft_putnbr(map->p1_x);
-	ft_putchar('\n');
-	//coordinates = heatmap(map, piece, players);
-	free(map);
-	free(piece);
-	free(players);
 	return(0);
 }
