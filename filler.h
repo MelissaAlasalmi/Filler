@@ -7,7 +7,7 @@ typedef struct		s_filler
 {
 	int playernum;
 	char **map;
-	char **newmap;
+	int **heatmap;
 	int	map_y;
 	int map_x;
 	int p1_y;
@@ -19,7 +19,7 @@ typedef struct		s_filler
 	int	piece_x;
 }					t_filler;
 
-// void construct_map(t_filler *map);
+int construct_map(t_filler *map);
 // void return_coordnates(t_filler *map);
 
 #endif

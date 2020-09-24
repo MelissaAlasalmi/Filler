@@ -1,8 +1,8 @@
 NAME = malasalm.filler
 
-SRCS = 	filler.c \
+SRCS = 	filler.c construct_map.c \
 
-OBJS = 	filler.o \
+OBJS = 	filler.o construct_map.o \
 
 INCS = -I libft/libft.h
 

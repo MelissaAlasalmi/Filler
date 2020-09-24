@@ -56,7 +56,7 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 	free(res[0]);
 	free(res[1]);
 	free(res);
-	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_x + 1)))
+	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_y + 1)))
 		return (0);
 	get_next_line(fd, &line);
 	while (ft_strstr(line, "Piece") == NULL && get_next_line(fd, &line) == 1)
@@ -82,15 +82,15 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 				data->p2_x = y - 4;
 				y = 0;	
 			}
-			nb++;	
+			nb++;
 		}
 	}
 	data->map[nb] = NULL;
-	while (*data->map != NULL)
-	{
-		printf("map: %s\n", *data->map);
-		data->map++;
-	}
+	// while (data->map != NULL)
+	// {
+	// 	printf("map: %s\n", *data->map);
+	// 	data->map++;
+	// }
 	printf("p1_y: %d\n", data->p1_y);
 	printf("p1_x: %d\n", data->p1_x);
 	printf("p2_y: %d\n", data->p2_y);
@@ -134,10 +134,13 @@ int		main(int argc, char **argv) // only for debugging with a file
 		if (line && ft_strstr(line, "Piece"))
 		{
 			if (get_piece(data, line, fd2) == 1)
+			{
+				construct_map(data);
 				break ;
+			}
 		}
-		construct_map(data);
-		free(data);
+		
+		//free(data);
 	}
 	return(0);
 }
