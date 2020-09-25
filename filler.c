@@ -87,6 +87,7 @@ static int get_player(t_filler *data , char *line)
 		data->playernum = 1;
 	else
 		data->playernum = 2;	
+	printf("playernum: %d\n", data->playernum);
 	return(1);
 }
 
