@@ -2,6 +2,7 @@
 # define FILLER_H
 #include "libft/libft.h"
 #include <fcntl.h>
+#include <stdio.h> // REMOVE!
 
 typedef struct		s_filler
 {
@@ -17,9 +18,13 @@ typedef struct		s_filler
 	char **piece;
 	int	piece_y;
 	int	piece_x;
+	int row_offset;
+    int column_offset;
 }					t_filler;
 
 int construct_map(t_filler *map);
+void place_piece(t_filler *map);
+int teststruct(int power, t_filler *data);
 // void return_coordnates(t_filler *map);
 
 #endif

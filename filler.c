@@ -1,5 +1,4 @@
 #include "filler.h"
-#include <stdio.h>
 
 static int get_piece(t_filler *data, char *pieceline, int fd)
 {
@@ -12,8 +11,6 @@ static int get_piece(t_filler *data, char *pieceline, int fd)
 		return (0);
 	data->piece_y = ft_atoi(res[0]);
 	data->piece_x = ft_atoi(res[1]);
-	printf("piece_y: %d\n", data->piece_y);
-	printf("piece_x: %d\n", data->piece_x);
 	free(res[0]);
 	free(res[1]);
 	free(res);
@@ -30,11 +27,6 @@ static int get_piece(t_filler *data, char *pieceline, int fd)
 			break ;
 	}
 	data->piece[nb] = NULL;
-	while (*data->piece != NULL)
-	{
-		printf("piece: %s\n", *data->piece);
-		data->piece++;
-	}
 	return (1);
 }
 
@@ -51,8 +43,6 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 		return (0);
 	data->map_y = ft_atoi(res[0]);
 	data->map_x = ft_atoi(res[1]);
-	printf("map_y: %d\n", data->map_y);
-	printf("map_x: %d\n", data->map_x);
 	free(res[0]);
 	free(res[1]);
 	free(res);
@@ -86,15 +76,6 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 		}
 	}
 	data->map[nb] = NULL;
-	// while (data->map != NULL)
-	// {
-	// 	printf("map: %s\n", *data->map);
-	// 	data->map++;
-	// }
-	printf("p1_y: %d\n", data->p1_y);
-	printf("p1_x: %d\n", data->p1_x);
-	printf("p2_y: %d\n", data->p2_y);
-	printf("p2_x: %d\n", data->p2_x);
 	return (line);
 }
 
@@ -106,7 +87,6 @@ static int get_player(t_filler *data , char *line)
 		data->playernum = 1;
 	else
 		data->playernum = 2;	
-	printf("playernum: %d\n", data->playernum);
 	return(1);
 }
 
@@ -139,8 +119,7 @@ int		main(int argc, char **argv) // only for debugging with a file
 				break ;
 			}
 		}
-		
-		//free(data);
+		free(data);
 	}
-	return(0);
+	return(teststruct(1, data));
 }
