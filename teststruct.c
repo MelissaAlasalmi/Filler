@@ -19,7 +19,7 @@ int teststruct(int power, t_filler *data)
         ft_putnbr_fd(data->map_x, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("map:\n", 2);
-        while (data->map[i] != NULL)
+        while (i < data->map_y)
         {
             ft_putstr_fd(data->map[i], 2);
             ft_putchar_fd('\n', 2);
@@ -45,7 +45,7 @@ int teststruct(int power, t_filler *data)
         ft_putnbr_fd(data->piece_x, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("piece:\n", 2);
-        while (data->piece[i] != NULL)
+        while (i < data->piece_y)
         {
             ft_putstr_fd(data->piece[i], 2);
             ft_putchar_fd('\n', 2);
@@ -75,12 +75,22 @@ int teststruct(int power, t_filler *data)
             i++;
             j = 0;
         }
+        i = 0;
+        j = 0;
         ft_putstr_fd("y_offset: ", 2);
         ft_putnbr_fd(data->row_offset, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("x_offset: ", 2);
         ft_putnbr_fd(data->column_offset, 2);
         ft_putchar_fd('\n', 2);
+        ft_putstr_fd("newpiece:\n", 2);
+        // while (i < data->piece_y)
+        // {
+        //     ft_putstr_fd(data->npiece[i], 2);
+        //     ft_putchar_fd('\n', 2);
+        //     i++;
+
+        // }
         return (0);
     }
     else

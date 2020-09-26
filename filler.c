@@ -11,7 +11,7 @@ static int get_piece(t_filler *data, char *pieceline, int fd)
 		return (0);
 	data->piece_y = ft_atoi(res[0]);
 	data->piece_x = ft_atoi(res[1]);
-	if (!(data->piece = (char**)malloc(sizeof(char*) * data->piece_y + 1)))
+	if (!(data->piece = (char**)malloc(sizeof(char*) * data->piece_y)))
 		return (0);
 	while (row < data->piece_y && get_next_line(fd, &line) == 1)
 	{
@@ -23,7 +23,6 @@ static int get_piece(t_filler *data, char *pieceline, int fd)
 		if (row == data->piece_y)
 			break ;
 	}
-	data->piece[row] = NULL;
 	free(res[0]);
 	free(res[1]);
 	free(res);
@@ -43,7 +42,7 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 		return (0);
 	data->map_y = ft_atoi(res[0]);
 	data->map_x = ft_atoi(res[1]);
-	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_y + 1)))
+	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_y)))
 		return (0);
 	get_next_line(fd, &line);
 	while (ft_strstr(line, "Piece") == NULL && get_next_line(fd, &line) == 1)
@@ -72,7 +71,6 @@ static char	*get_map(t_filler *data, char *mapline, int fd)
 		row++;
 		}
 	}
-	data->map[row] = NULL;
 	free(res[0]);
 	free(res[1]);
 	free(res);

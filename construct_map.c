@@ -52,7 +52,7 @@ void construct_heatmap(t_filler *data)
         }
         row++;
     }
-   place_piece(data);
+    place_piece(data);
 }
 
 int construct_map(t_filler *data)
@@ -62,11 +62,11 @@ int construct_map(t_filler *data)
 
     i = 0;
     j = 0;
-    if (!(data->heatmap = (int**)malloc(sizeof(int*) * data->map_y + 1)))
+    if (!(data->heatmap = (int**)malloc(sizeof(int*) * data->map_y)))
 		return (0);
     while (i < data->map_x)
     {
-        if(!(data->heatmap[i] = (int*)malloc(sizeof(int) * (data->map_x + 1))))
+        if(!(data->heatmap[i] = (int*)malloc(sizeof(int) * data->map_x)))
             return(0);
         i++;
     }

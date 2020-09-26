@@ -20,6 +20,7 @@ typedef struct		s_filler
 	int	piece_x;
 	int row_offset;
     int column_offset;
+	int **npiece;
 }					t_filler;
 
 int construct_map(t_filler *map);
