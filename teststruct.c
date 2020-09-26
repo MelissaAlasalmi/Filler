@@ -25,7 +25,6 @@ int teststruct(int power, t_filler *data)
             ft_putchar_fd('\n', 2);
             i++;
         }
-        ft_putchar_fd('\n', 2);
         i = 0;
         ft_putstr_fd("p1_y: ", 2);
         ft_putnbr_fd(data->p1_y, 2);
