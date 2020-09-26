@@ -84,13 +84,20 @@ int teststruct(int power, t_filler *data)
         ft_putnbr_fd(data->column_offset, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("newpiece:\n", 2);
-        // while (i < data->piece_y)
-        // {
-        //     ft_putstr_fd(data->npiece[i], 2);
-        //     ft_putchar_fd('\n', 2);
-        //     i++;
-
-        // }
+        while (i < (data->piece_y - data->row_offset))
+        {
+            while (j < (data->piece_x - data->column_offset))
+            {
+                if (data->npiece[i][j] == 0)
+                    ft_putchar_fd(' ', 2);
+                ft_putnbr_fd(data->npiece[i][j], 2);
+                ft_putchar_fd('|', 2);
+                j++;
+            }
+            ft_putchar_fd('\n', 2);
+            i++;
+            j = 0;
+        }
         return (0);
     }
     else

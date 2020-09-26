@@ -1,40 +1,40 @@
 #include "filler.h"
 
-// static int remove_offset(t_filler *data, int row, int column)
-// {
-//     int star;
+static int remove_offset(t_filler *data, int row, int column)
+{
+    int i;
+    int j;
 
-//     star = 0;
-// 	if (!(data->npiece = (int**)malloc(sizeof(int*) * (data->piece_y - data->row_offset))))
-// 		return (0);
-//     while (column < data->piece_x)
-//     {
-//         if(!(data->npiece[column] = (int*)malloc(sizeof(int) * (data->map_x- data->column_offset))))
-//             return(0);
-//         column++;
-//     }
-//     column = 0;
-//     while (data->piece[row] < data->piece_y)
-// 	{
-//         while (data->piece[row][column] != '\0')
-//         {
-//             if(data->piece[row][column] == '*')
-//                 star++;
-//             column++;
-//         }
-//         column = 0;
-//         data->npiece[row] = ft_strnew(star);
-//         star = 0;
-//         while (data->npiece[row][column] != '\0')
-//         {
-//             data->npiece[row][column] = '*';
-//             column++;
-//         }
-//         row++;
-//         column = 0;
-//     }
-//     return (1);
-// }
+    i = 0;
+    j = 0;
+	if (!(data->npiece = (int**)malloc(sizeof(int*) * (data->piece_y - data->row_offset))))
+		return (0);
+    while (column < data->piece_x)
+    {
+        if(!(data->npiece[column] = (int*)malloc(sizeof(int) * (data->map_x- data->column_offset))))
+            return(0);
+        column++;
+    }
+    row = data->row_offset; //set's place for original piece to compare
+    column = data->column_offset; //set's place for original piece to compare
+    while (row < data->piece_y)
+	{
+        while (data->piece[row][column] != '\0')
+        {
+            if(data->piece[row][column] == '*')
+                data->npiece[i][j] = -1;
+            else
+                data->npiece[i][j] = 0;
+            column++;
+            j++;
+        }
+        row++;
+        i++;
+        column = data->column_offset;
+        j = 0;
+    }
+    return (1);
+}
 
 void get_x_offset(t_filler *data, int row, int column)
 {
@@ -89,6 +89,6 @@ void place_piece(t_filler *data)
     column = 0;
     get_y_offset(data, row, column);
     get_x_offset(data, row, column);
-    //remove_offset(data, row, column);
+    remove_offset(data, row, column);
 
 }
