@@ -7,6 +7,7 @@ void save_coords(t_filler *data, int y, int x)
     int coord_x;
     int y_temp;
     int x_temp;
+    int x_reset;
 
     temp_sum = 0;
     coord_y = 0;
@@ -14,22 +15,23 @@ void save_coords(t_filler *data, int y, int x)
     data->sum = 0;
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
+    x_reset = x;
     while (y < y_temp) //parses thru valid piece area to gather data
     {
+        x = x_reset;
         while (x < x_temp) //parses thru vajid piece area to gather data
         {
-            ft_putnbr_fd(data->heatmap[y][x], 2);
             temp_sum = temp_sum + data->heatmap[y][x];
             if (data->heatmap[y][x] == -1)
             {
-             coord_y = y;   
+                coord_y = y;
                 coord_x = x;
-            }   
+            }
             x++;
         }
         y++;
     }
-    if (temp_sum < data->sum)
+    if (temp_sum < data->sum || data->sum == 0)
     {
         data->sum = temp_sum;
         data->coord_y = coord_y;
