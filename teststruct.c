@@ -83,6 +83,12 @@ int teststruct(int power, t_filler *data)
         ft_putstr_fd("x_offset: ", 2);
         ft_putnbr_fd(data->column_offset, 2);
         ft_putchar_fd('\n', 2);
+        ft_putstr_fd("npiece_y: ", 2);
+        ft_putnbr_fd(data->npiece_y, 2);
+        ft_putchar_fd('\n', 2);
+        ft_putstr_fd("npiece_x: ", 2);
+        ft_putnbr_fd(data->npiece_x, 2);
+        ft_putchar_fd('\n', 2);
         ft_putstr_fd("newpiece:\n", 2);
         while (i < (data->piece_y - data->row_offset))
         {
@@ -98,6 +104,16 @@ int teststruct(int power, t_filler *data)
             i++;
             j = 0;
         }
+        ft_putchar_fd('\n', 2);
+        ft_putstr_fd("coord_y: ", 2);
+        ft_putnbr_fd(data->coord_y, 2);
+        ft_putchar_fd('\n', 2);
+        ft_putstr_fd("coord_x: ", 2);
+        ft_putnbr_fd(data->coord_x, 2);
+        ft_putchar_fd('\n', 2);
+        ft_putstr_fd("sum: ", 2);
+        ft_putnbr_fd(data->sum, 2);
+        ft_putchar_fd('\n', 2);
         return (0);
     }
     else

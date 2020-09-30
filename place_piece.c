@@ -1,94 +1,93 @@
 #include "filler.h"
 
-static int remove_offset(t_filler *data, int row, int column)
+void save_coords(t_filler *data, int y, int x)
 {
-    int i;
-    int j;
+    int temp_sum;
+    int coord_y;
+    int coord_x;
+    int y_temp;
+    int x_temp;
 
-    i = 0;
-    j = 0;
-	if (!(data->npiece = (int**)malloc(sizeof(int*) * (data->piece_y - data->row_offset))))
-		return (0);
-    while (column < data->piece_x)
+    temp_sum = 0;
+    coord_y = 0;
+    coord_x = 0;
+    data->sum = 0;
+    y_temp = y + data->npiece_y;
+    x_temp = x + data->npiece_x;
+    while (y < y_temp) //parses thru valid piece area to gather data
     {
-        if(!(data->npiece[column] = (int*)malloc(sizeof(int) * (data->map_x- data->column_offset))))
-            return(0);
-        column++;
-    }
-    row = data->row_offset; //set's place for original piece to compare
-    column = data->column_offset; //set's place for original piece to compare
-    while (row < data->piece_y)
-	{
-        while (data->piece[row][column] != '\0')
+        while (x < x_temp) //parses thru vajid piece area to gather data
         {
-            if(data->piece[row][column] == '*')
-                data->npiece[i][j] = -1;
+            ft_putnbr_fd(data->heatmap[y][x], 2);
+            temp_sum = temp_sum + data->heatmap[y][x];
+            if (data->heatmap[y][x] == -1)
+            {
+             coord_y = y;   
+                coord_x = x;
+            }   
+            x++;
+        }
+        y++;
+    }
+    if (temp_sum < data->sum)
+    {
+        data->sum = temp_sum;
+        data->coord_y = coord_y;
+        data->coord_x = coord_x;
+    }
+}
+
+int scan_piece_area(t_filler *data, int y, int x)
+{
+    int count;
+    int x_reset;
+    int y_temp;
+    int x_temp;
+
+    count = 0;
+    x_reset = x;
+    y_temp = y + data->npiece_y;
+    x_temp = x + data->npiece_x;
+    while (y < y_temp) //parses thru map alongside piece values
+    {
+        x = x_reset;
+        while (x < x_temp) //parses thru map alongside piece values
+        {
+            if (data->heatmap[y][x] == -1)
+            {
+                count++;
+                x++;
+            }
+            else if (data->heatmap[y][x] == -2)
+            {
+                count = 2;
+                break ;
+            }
             else
-                data->npiece[i][j] = 0;
-            column++;
-            j++;
+                x++;
         }
-        row++;
-        i++;
-        column = data->column_offset;
-        j = 0;
+        y++;
     }
-    return (1);
-}
-
-void get_x_offset(t_filler *data, int row, int column)
-{
-    int temp;
-    int x_offset;
-
-    temp = 0;
-    x_offset = 0;   
-    while (row < data->piece_y)
-	{
-		while (data->piece[row][column] == '.')
-        {
-            temp++;
-            column++;
-        }
-        if (temp < x_offset || x_offset == 0)
-            x_offset = temp;
-        temp = 0;
-        column = 0;
-		row++;
-	}
-    data->column_offset = x_offset;
-}
-
-void get_y_offset(t_filler *data, int row, int column)
-{
-    int y_offset;
-
-    y_offset = 0;
-    while (row < data->piece_y)
-	{
-        while (data->piece[row][column] == '.')
-            column++;
-        if (data->piece[row][column] == '\0')
-        {
-            y_offset++;
-            column = 0;
-            row++;
-        }
-        else
-            break ;
-    }
-    data->row_offset = y_offset;
+    return(count);
 }
 
 void place_piece(t_filler *data)
 {
-    int row;
-    int column;
+    int y;
+    int x;
+    int count;
 
-    row = 0;
-    column = 0;
-    get_y_offset(data, row, column);
-    get_x_offset(data, row, column);
-    remove_offset(data, row, column);
-
+    y = 0;
+    while (y <= (data->map_y - data->npiece_y)) //parses thru whole playable map
+    {
+        x = 0;
+        while (x <= (data->map_x - data->npiece_x)) //parses thru whole playable map
+        {
+            count = scan_piece_area(data, y, x);
+            if (count == 1)
+                save_coords(data, y, x);
+            x++;
+        }
+        y++;
+    }
 }

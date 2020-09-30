@@ -52,7 +52,7 @@ void construct_heatmap(t_filler *data)
         }
         row++;
     }
-    place_piece(data);
+    prep_piece(data);
 }
 
 int construct_map(t_filler *data)

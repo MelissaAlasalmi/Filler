@@ -21,11 +21,17 @@ typedef struct		s_filler
 	int row_offset;
     int column_offset;
 	int **npiece;
+	int npiece_y;
+	int npiece_x;
+	int coord_y;
+	int coord_x;
+	int sum;
 }					t_filler;
 
 int construct_map(t_filler *map);
-void place_piece(t_filler *map);
+void prep_piece(t_filler *map);
 int teststruct(int power, t_filler *data);
+void place_piece(t_filler *data);
 // void return_coordnates(t_filler *map);
 
 #endif
