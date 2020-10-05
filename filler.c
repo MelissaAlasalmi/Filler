@@ -67,32 +67,32 @@ static int get_map(t_filler *data, char *mapline, int fd)
 	return (1);
 }
 
-//int		main(int argc, char **argv) // only for debugging with a file
-int main(void)
+int		main(int argc, char **argv) // only for debugging with a file
+//int main(void)
 {
 	t_filler *data;
 	char *line;
 	int fd;
-	// int fd2; // only for debugging using a file
-	// argc = 0; // only for debugging + unsused argc
-	// fd2 = open(argv[1], O_RDONLY); //only for debugging + unused argv
+	int fd2; // only for debugging using a file
+	argc = 0; // only for debugging + unsused argc
+	fd2 = open(argv[1], O_RDONLY); //only for debugging + unused argv
 	line = NULL;
 	fd = 0;
 	if (!(data = (t_filler *)malloc(sizeof(t_filler))))
 		return (0);
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(fd2, &line) == 1)
 	{
 		if (line && ft_strstr(line, "$$$"))
 			data->playernum = ft_atoi(&line[10]);
 		if (line && ft_strstr(line, "Plateau"))
-			get_map(data, line, fd);
+			get_map(data, line, fd2);
 		if (line && ft_strstr(line, "Piece"))
 		{
-			if (get_piece(data, line, fd) == 1)
+			if (get_piece(data, line, fd2) == 1)
 			{
 				construct_map(data);
-				teststruct(0, data);
-				free_data(data);
+				teststruct(1, data);
+				//free_data(data);
 				ft_putnbr(data->coord_y - data->y_offset);
 				ft_putchar(' ');
 				ft_putnbr(data->coord_x - data->x_offset);

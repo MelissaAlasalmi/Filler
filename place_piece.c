@@ -12,7 +12,6 @@ void save_coords(t_filler *data, int y, int x)
     temp_sum = 0;
     coord_y = 0;
     coord_x = 0;
-    //data->sum = 0;
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
     x_reset = x;
@@ -31,10 +30,6 @@ void save_coords(t_filler *data, int y, int x)
         }
         y++;
     }
-    // ft_putnbr_fd(data->sum, 2);
-    // ft_putchar_fd('\n', 2);
-    // ft_putnbr_fd(temp_sum, 2);
-    // ft_putchar_fd('\n', 2);
     if (temp_sum < data->sum || data->sum == 0)
     {
         data->sum = temp_sum;
