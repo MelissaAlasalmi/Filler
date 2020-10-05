@@ -37,54 +37,63 @@ int fill_heatmap(t_filler *data, int row, int column)
 
 void construct_heatmap(t_filler *data)
 {
-    int row;
-    int column;
+    int y;
+    int x;
 
-    row = 0;
-    while (row <= data->map_y)
+    y = 0;
+    while (y <= data->map_y)
     {    
-        column = 0;
-        while (column <= data->map_x)
+        x = 0;
+        while (x <= data->map_x)
         {
-            if (data->heatmap[row][column] == 0)
-                data->heatmap[row][column] = fill_heatmap(data, row, column);
-            column++;
+            if (data->heatmap[y][x] == 0)
+                data->heatmap[y][x] = fill_heatmap(data, y, x);
+            x++;
         }
-        row++;
+        y++;
     }
     prep_piece(data);
 }
 
 int construct_map(t_filler *data)
 {
-    int i;
-    int j;
+    int y;
+    int x;
 
-    i = 0;
-    j = 0;
+    y = 0;
     if (!(data->heatmap = (int**)malloc(sizeof(int*) * data->map_y)))
 		return (0);
-    while (i < data->map_x)
+    while (y < data->map_x)
     {
-        if(!(data->heatmap[i] = (int*)malloc(sizeof(int) * data->map_x)))
+        if(!(data->heatmap[y] = (int*)malloc(sizeof(int) * data->map_x)))
             return(0);
-        i++;
+        y++;
     }
-    i = 0;
-    while (i < data->map_y)
+    y = 0;
+    while (y < data->map_y)
     {
-        while (j < data->map_x)
+        x = 0;
+        while (x < data->map_x)
         {
-            if (data->map[i][j] == '.')
-                data->heatmap[i][j] = 0;
-            if (data->map[i][j] == 'o' || data->map[i][j] == 'O')
-                data->heatmap[i][j] = -1;
-            if (data->map[i][j] == 'x' || data->map[i][j] == 'X')
-                data->heatmap[i][j] = -2;
-            j++;
+            if (data->map[y][x] == '.')
+                data->heatmap[y][x] = 0;
+            if (data->map[y][x] == 'o' || data->map[y][x] == 'O')
+            {
+                if(data->playernum == 1)
+                    data->heatmap[y][x] = -1;
+                else
+                    data->heatmap[y][x] = -2;
+            }
+            if (data->map[y][x] == 'x' || data->map[y][x] == 'X')
+            {
+                if(data->playernum == 2)
+                    data->heatmap[y][x] = -1;
+                else
+                    data->heatmap[y][x] = -2;
+            }
+            x++;
         }
-        i++;
-        j = 0;
+        y++;
     }
     construct_heatmap(data);
     return (0);

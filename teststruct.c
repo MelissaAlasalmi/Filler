@@ -26,18 +26,6 @@ int teststruct(int power, t_filler *data)
             i++;
         }
         i = 0;
-        ft_putstr_fd("p1_y: ", 2);
-        ft_putnbr_fd(data->p1_y, 2);
-        ft_putchar_fd('\n', 2);
-        ft_putstr_fd("p1_x: ", 2);
-        ft_putnbr_fd(data->p1_x, 2);
-        ft_putchar_fd('\n', 2);
-        ft_putstr_fd("p2_y: ", 2);
-        ft_putnbr_fd(data->p2_y, 2);
-        ft_putchar_fd('\n', 2);
-        ft_putstr_fd("p2_x: ", 2);
-        ft_putnbr_fd(data->p2_x, 2);
-        ft_putchar_fd('\n', 2);
         ft_putstr_fd("piece_y: ", 2);
         ft_putnbr_fd(data->piece_y, 2);
         ft_putchar_fd('\n', 2);
@@ -78,32 +66,16 @@ int teststruct(int power, t_filler *data)
         i = 0;
         j = 0;
         ft_putstr_fd("y_offset: ", 2);
-        ft_putnbr_fd(data->row_offset, 2);
+        ft_putnbr_fd(data->y_offset, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("x_offset: ", 2);
-        ft_putnbr_fd(data->column_offset, 2);
+        ft_putnbr_fd(data->x_offset, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("npiece_y: ", 2);
         ft_putnbr_fd(data->npiece_y, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("npiece_x: ", 2);
         ft_putnbr_fd(data->npiece_x, 2);
-        ft_putchar_fd('\n', 2);
-        ft_putstr_fd("newpiece:\n", 2);
-        while (i < (data->piece_y - data->row_offset))
-        {
-            while (j < (data->piece_x - data->column_offset))
-            {
-                if (data->npiece[i][j] == 0)
-                    ft_putchar_fd(' ', 2);
-                ft_putnbr_fd(data->npiece[i][j], 2);
-                ft_putchar_fd('|', 2);
-                j++;
-            }
-            ft_putchar_fd('\n', 2);
-            i++;
-            j = 0;
-        }
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("coord_y: ", 2);
         ft_putnbr_fd(data->coord_y, 2);
