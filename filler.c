@@ -17,6 +17,7 @@ static int get_piece(t_filler *data, char *pieceline, int fd)
 	y = 0;
 	if (!(res = ft_strsplit(&pieceline[5], ' ')))
 		return (0);
+	//ft_putstr_fd("here3\n", 2);
 	data->piece_y = ft_atoi(res[0]);
 	data->piece_x = ft_atoi(res[1]);
 	if (!(data->piece = (char**)malloc(sizeof(char*) * data->piece_y)))
