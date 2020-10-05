@@ -20,6 +20,8 @@ void get_x_offset(t_filler *data, int y, int x)
                     offset_temp++;
                     x++;
                 }
+                if (offset_temp == data->piece_x)
+                    offset_temp = 0;
             }
             else
                 break ;
