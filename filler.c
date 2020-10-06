@@ -89,16 +89,16 @@ int main(void)
 			if (get_piece(data, line, fd) == 1)
 			{
 				construct_map(data);
-				teststruct(0, data);
-				free_data(data);
+				teststruct(1, data);
 				ft_putnbr(data->coord_y - data->y_offset);
 				ft_putchar(' ');
 				ft_putnbr(data->coord_x - data->x_offset);
 				ft_putchar('\n');
+				free_data(data);
 			}
 		}
 		free(line);
 	}
 	//free(data);
-	return(teststruct(0, data));
+	return(0);
 }

@@ -3,36 +3,33 @@
 void get_x_offset(t_filler *data, int y, int x)
 {
     int x_offset;
-    int offset_temp;
+    int temp_offset;
 
-    x_offset = 0;
-    offset_temp = 0;
+    x_offset = data->piece_x;
     y = y + data->y_offset;
     while (y < data->piece_y)
-	{
+    {
         x = 0;
+        temp_offset = 0;
         while (x < data->piece_x)
         {
             if (data->piece[y][x] == '.')
             {
                 while (data->piece[y][x] == '.')
                 {
-                    offset_temp++;
+                    temp_offset++;
                     x++;
                 }
-                if (offset_temp == data->piece_x)
-                    offset_temp = 0;
             }
             else
                 break ;
         }
-        if (offset_temp > x_offset)
-            x_offset = offset_temp;
-        offset_temp = 0;
+        if (temp_offset < x_offset)
+            x_offset = temp_offset;
         y++;
     }
     data->x_offset = x_offset;
-    data->npiece_x = data->piece_x - data->x_offset;
+    data->npiece_x = data->piece_x - x_offset;
 }
 
 void get_y_offset(t_filler *data, int y, int x)

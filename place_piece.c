@@ -15,10 +15,10 @@ void save_coords(t_filler *data, int y, int x)
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
     x_reset = x;
-    while (y < y_temp) //parses thru valid piece area to gather data
+    while (y < y_temp) //scans thru valid piece area to gather data
     {
         x = x_reset;
-        while (x < x_temp) //parses thru vajid piece area to gather data
+        while (x < x_temp) //scans thru valid piece area to gather data
         {
             temp_sum = temp_sum + data->heatmap[y][x];
             if (data->heatmap[y][x] == -1)
@@ -49,10 +49,10 @@ int scan_piece_area(t_filler *data, int y, int x)
     x_reset = x;
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
-    while (y < y_temp) //parses thru map alongside piece values
+    while (y < y_temp) //scans thru map alongside piece values
     {
         x = x_reset;
-        while (x < x_temp) //parses thru map alongside piece values
+        while (x < x_temp) //scans thru map alongside piece values
         {
             if (data->heatmap[y][x] == -1)
             {
@@ -79,10 +79,10 @@ void place_piece(t_filler *data)
     int count;
 
     y = 0;
-    while (y <= (data->map_y - data->npiece_y)) //parses thru whole playable map
+    while (y <= (data->map_y - data->npiece_y)) //scans thru whole playable map
     {
         x = 0;
-        while (x <= (data->map_x - data->npiece_x)) //parses thru whole playable map
+        while (x <= (data->map_x - data->npiece_x)) //scans thru whole playable map
         {
             count = scan_piece_area(data, y, x);
             if (count == 1)
