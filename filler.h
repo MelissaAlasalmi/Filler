@@ -23,6 +23,7 @@ typedef struct		s_filler
 	int sum;
 }					t_filler;
 
+int scan_fd(t_filler *data, char *line, int fd);
 int construct_map(t_filler *map);
 void prep_piece(t_filler *map);
 int teststruct(int power, t_filler *data);

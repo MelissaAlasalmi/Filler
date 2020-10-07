@@ -19,13 +19,16 @@ int teststruct(int power, t_filler *data)
         ft_putnbr_fd(data->map_x, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("map:\n", 2);
-        while (i < data->map_y)
-        {
-            ft_putstr_fd(data->map[i], 2);
-            ft_putchar_fd('\n', 2);
-            i++;
+        if (data->map != NULL)
+        {        
+            while (i < data->map_y)
+            {
+                ft_putstr_fd(data->map[i], 2);
+                ft_putchar_fd('\n', 2);
+                i++;
+            }
+            i = 0;
         }
-        i = 0;
         ft_putstr_fd("piece_y: ", 2);
         ft_putnbr_fd(data->piece_y, 2);
         ft_putchar_fd('\n', 2);
@@ -33,38 +36,43 @@ int teststruct(int power, t_filler *data)
         ft_putnbr_fd(data->piece_x, 2);
         ft_putchar_fd('\n', 2);
         ft_putstr_fd("piece:\n", 2);
-        while (i < data->piece_y)
+        if (data->piece != NULL)
         {
-            ft_putstr_fd(data->piece[i], 2);
-            ft_putchar_fd('\n', 2);
-            i++;
+            while (i < data->piece_y)
+            {
+                ft_putstr_fd(data->piece[i], 2);
+                ft_putchar_fd('\n', 2);
+                i++;
 
+            }
+            i = 0;
         }
         ft_putstr_fd("new heatmap:\n", 2);
-        i = 0;
-        j = 0;
-        while (i < data->map_y)
+        if (data->heatmap != NULL)
         {
-            while (j < data->map_x)
+            while (i < data->map_y)
             {
-                if (data->heatmap[i][j] < 10)
+                while (j < data->map_x)
                 {
-                    ft_putchar_fd(' ', 2);
-                    if (data->heatmap[i][j] > 0)
+                    if (data->heatmap[i][j] < 10)
+                    {
                         ft_putchar_fd(' ', 2);
+                        if (data->heatmap[i][j] > 0)
+                            ft_putchar_fd(' ', 2);
+                    }
+                    else
+                        ft_putchar_fd(' ', 2);
+                    ft_putnbr_fd(data->heatmap[i][j], 2);
+                    ft_putchar_fd('|', 2);
+                    j++;
                 }
-                else
-                    ft_putchar_fd(' ', 2);
-                ft_putnbr_fd(data->heatmap[i][j], 2);
-                ft_putchar_fd('|', 2);
-                j++;
+                ft_putchar_fd('\n', 2);
+                i++;
+                j = 0;
             }
-            ft_putchar_fd('\n', 2);
-            i++;
+            i = 0;
             j = 0;
         }
-        i = 0;
-        j = 0;
         ft_putstr_fd("y_offset: ", 2);
         ft_putnbr_fd(data->y_offset, 2);
         ft_putchar_fd('\n', 2);

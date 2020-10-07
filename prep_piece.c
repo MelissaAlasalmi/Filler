@@ -63,5 +63,4 @@ void prep_piece(t_filler *data)
     x = 0;
     get_y_offset(data, y, x);
     get_x_offset(data, y, x);
-    place_piece(data);
 }
