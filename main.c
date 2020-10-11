@@ -7,12 +7,9 @@ t_filler *initialize_struct(void)
 	if (!(data = (t_filler *)malloc(sizeof(t_filler))))
 		return (NULL);
 	data->playernum = 0;
-	//data->map = NULL;
-	data->heatmap = NULL;
 	data->map_y = 0;
 	data->map_x = 0;
 	data->m = 0;
-	data->piece = NULL;
 	data->piece_y = 0;
 	data->piece_x = 0;
 	data->p = 0;

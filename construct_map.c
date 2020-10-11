@@ -16,10 +16,10 @@ int fill_heatmap(t_filler *data, int row, int column)
 
     y = 0;
     min = 0;
-    while (y <= data->map_y)
-    {    
+    while (y < data->map_y)
+    {   
         x = 0;
-        while (x <= data->map_x)
+        while (x < data->map_x)
         {
             if (data->heatmap[y][x] == -2)
             {
@@ -41,10 +41,10 @@ void construct_heatmap(t_filler *data)
     int x;
 
     y = 0;
-    while (y <= data->map_y)
+    while (y < data->map_y)
     {    
         x = 0;
-        while (x <= data->map_x)
+        while (x < data->map_x)
         {
             if (data->heatmap[y][x] == 0)
                 data->heatmap[y][x] = fill_heatmap(data, y, x);
@@ -52,6 +52,7 @@ void construct_heatmap(t_filler *data)
         }
         y++;
     }
+    ft_putstr_fd("here", 2);
 }
 
 int construct_map(t_filler *data)
@@ -60,16 +61,15 @@ int construct_map(t_filler *data)
     int x;
 
     y = 0;
-    x = 0;
     if (!(data->heatmap = (int**)malloc(sizeof(int*) * data->map_y)))
 		return (1);
-    while (x < data->map_x)
+    while (y < data->map_y)
     {
-        if(!(data->heatmap[x] = (int*)malloc(sizeof(int) * data->map_x)))
+        if(!(data->heatmap[y] = (int*)malloc(sizeof(int) * data->map_x)))
             return(1);
-        x++;
+        y++;
     }
-    x = 0;
+    y = 0;
     while (y < data->map_y)
     {
         x = 0;

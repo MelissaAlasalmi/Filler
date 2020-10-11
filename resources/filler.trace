@@ -1,6 +1,5 @@
-seed = 4868
-../malasalm.filler: Segfault at 0
-X: error on input
-./players/superjeannot.filler won
+seed = 7141
+O: error on input
+./players/carli.filler won
 Score:
-0AGAINST8
+0AGAINST0
