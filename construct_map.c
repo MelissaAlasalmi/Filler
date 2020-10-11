@@ -60,15 +60,16 @@ int construct_map(t_filler *data)
     int x;
 
     y = 0;
+    x = 0;
     if (!(data->heatmap = (int**)malloc(sizeof(int*) * data->map_y)))
-		return (0);
-    while (y < data->map_x)
+		return (1);
+    while (x < data->map_x)
     {
-        if(!(data->heatmap[y] = (int*)malloc(sizeof(int) * data->map_x)))
-            return(0);
-        y++;
+        if(!(data->heatmap[x] = (int*)malloc(sizeof(int) * data->map_x)))
+            return(1);
+        x++;
     }
-    y = 0;
+    x = 0;
     while (y < data->map_y)
     {
         x = 0;
@@ -95,6 +96,6 @@ int construct_map(t_filler *data)
         y++;
     }
     construct_heatmap(data);
-    //testheatmap(data);
+    testheatmap(data);
     return (0);
 }

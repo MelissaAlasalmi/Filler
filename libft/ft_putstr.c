@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:23:16 by malasalm          #+#    #+#             */
-/*   Updated: 2019/11/08 00:17:01 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/11 16:42:03 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	ft_putstr(char const *s)
 	int i;
 
 	i = 0;
-	if (s)
-		while (s[i] != '\0')
-		{
-			ft_putchar(s[i]);
-			i++;
-		}
+	while (s[i] != '\0')
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
 }
