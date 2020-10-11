@@ -78,21 +78,10 @@ void teststruct(t_filler *data)
 
     i = 0;
     j = 0;  
-    ft_putstr_fd("playernum: ", 2);
-    ft_putnbr_fd(data->playernum, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("map_y: ", 2);
-    ft_putnbr_fd(data->map_y, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("map_x: ", 2);
-    ft_putnbr_fd(data->map_x, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("piece_y: ", 2);
-    ft_putnbr_fd(data->piece_y, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("piece_x: ", 2);
-    ft_putnbr_fd(data->piece_x, 2);
-    ft_putchar_fd('\n', 2);
+
+
+
+
     ft_putstr_fd("y_offset: ", 2);
     ft_putnbr_fd(data->y_offset, 2);
     ft_putchar_fd('\n', 2);

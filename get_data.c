@@ -7,13 +7,25 @@ int scan_fd(t_filler *data, char *line)
 
 	coord = NULL;
 	y = 0;
-	ft_putstr_fd("line in scan: ", 2);
-	ft_putstr_fd(line, 2);
-	ft_putchar_fd('\n', 2);
 	if (line && ft_strstr(line, "$$$"))
+	{    
+		ft_putstr_fd("playernum: ", 2);
+    	ft_putnbr_fd(data->playernum, 2);
+    	ft_putchar_fd('\n', 2);
 		data->playernum = ft_atoi(&line[10]);
+		ft_putstr_fd("playernum: ", 2);
+    	ft_putnbr_fd(data->playernum, 2);
+    	ft_putchar_fd('\n', 2);
+	}
+
 	else if (line && ft_strstr(line, "Plateau"))
 	{
+		ft_putstr_fd("map_y: ", 2);
+    	ft_putnbr_fd(data->map_y, 2);
+    	ft_putchar_fd('\n', 2);
+	    ft_putstr_fd("map_x: ", 2);
+		ft_putnbr_fd(data->map_x, 2);
+		ft_putchar_fd('\n', 2);
 		if (!(coord = ft_strsplit(&line[7], ' ')))
 			return (1);
 		data->map_y = ft_atoi(coord[0]);
@@ -26,14 +38,17 @@ int scan_fd(t_filler *data, char *line)
 				return(1);
 			y++;
 		}
+		ft_putstr_fd("map_y: ", 2);
+    	ft_putnbr_fd(data->map_y, 2);
+    	ft_putchar_fd('\n', 2);
+	    ft_putstr_fd("map_x: ", 2);
+		ft_putnbr_fd(data->map_x, 2);
+		ft_putchar_fd('\n', 2);
 		free(coord);
 	}
 	else if (line && line[0] == '0')
 	{
 		data->map[data->m] = ft_strdup(&line[4]);
-		ft_putstr_fd("allocated string: \n", 2);
-		ft_putstr_fd(data->map[data->m], 2);
-		ft_putchar_fd('\n', 2);
 		data->m++;
 		if (data->m == data->map_y)
 		{
@@ -45,6 +60,12 @@ int scan_fd(t_filler *data, char *line)
 	}
 	else if (line && ft_strstr(line, "Piece"))
 	{
+		ft_putstr_fd("piece_y: ", 2);
+		ft_putnbr_fd(data->piece_y, 2);
+		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("piece_x: ", 2);
+		ft_putnbr_fd(data->piece_x, 2);
+		ft_putchar_fd('\n', 2);
 		if (!(coord = ft_strsplit(&line[5], ' ')))
 			return (1);
 		data->piece_y = ft_atoi(coord[0]);
@@ -58,14 +79,24 @@ int scan_fd(t_filler *data, char *line)
 			y++;
 		}
 		free(coord);
+	    ft_putstr_fd("piece_y: ", 2);
+		ft_putnbr_fd(data->piece_y, 2);
+		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("piece_x: ", 2);
+		ft_putnbr_fd(data->piece_x, 2);
+		ft_putchar_fd('\n', 2);
 	}
 	else if (line && (line[0] == '.' || line[0] == '*'))
 	{
-		data->piece[data->p] = ft_strdup(line);
-		ft_putstr_fd("allocated string: \n", 2);
-		ft_putstr_fd(data->piece[data->p], 2);
+		ft_putstr_fd("data->p: \n", 2);
+		ft_putnbr_fd(data->p, 2);
 		ft_putchar_fd('\n', 2);
-		data->p++;
+		ft_putstr_fd("data->piece_y: \n", 2);
+		ft_putnbr_fd(data->piece_y, 2);
+		ft_putchar_fd('\n', 2);
+		data->piece[data->p] = ft_strdup(line);
+		ft_putstr_fd("piece: \n", 2);
+		ft_putstr_fd(data->piece[data->p], 2);
 		if (data->p == data->piece_y)
 		{
 			prep_piece(data);
@@ -75,10 +106,16 @@ int scan_fd(t_filler *data, char *line)
 			ft_putnbr(data->coord_x - data->x_offset);
 			ft_putchar('\n');
 			free_piece(data);
-			free_heatmap(data);
 			data->p = 0;
 		}
+		data->p++;
+		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("data->p: \n", 2);
+		ft_putnbr_fd(data->p, 2);
+		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("data->piece_y: \n", 2);
+		ft_putnbr_fd(data->piece_y, 2);
+		ft_putchar_fd('\n', 2);
 	}
 	return(0);
-	//teststruct(data);
 }
