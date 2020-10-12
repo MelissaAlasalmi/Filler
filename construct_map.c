@@ -54,7 +54,7 @@ void construct_heatmap(t_filler *data)
     }
 }
 
-int construct_map(t_filler *data)
+int construct_map(t_filler *data, int p)
 {
     int y;
     int x;
@@ -78,14 +78,14 @@ int construct_map(t_filler *data)
                 data->heatmap[y][x] = 0;
             if (data->map[y][x] == 'o' || data->map[y][x] == 'O')
             {
-                if(data->playernum == 1)
+                if(p == 1)
                     data->heatmap[y][x] = -1;
                 else
                     data->heatmap[y][x] = -2;
             }
             if (data->map[y][x] == 'x' || data->map[y][x] == 'X')
             {
-                if(data->playernum == 2)
+                if(p == 2)
                     data->heatmap[y][x] = -1;
                 else
                     data->heatmap[y][x] = -2;
@@ -95,5 +95,6 @@ int construct_map(t_filler *data)
         y++;
     }
     construct_heatmap(data);
+    //testheatmap(data);
     return (0);
 }

@@ -5,7 +5,6 @@
 
 typedef struct		s_filler
 {
-	int playernum;
 	char **map;
 	int **heatmap;
 	int	map_y;
@@ -24,8 +23,8 @@ typedef struct		s_filler
 	int sum;
 }					t_filler;
 
-int		scan_fd(t_filler *data, char *line);
-int		construct_map(t_filler *map);
+int		scan_fd(t_filler *data, char *line, int p);
+int		construct_map(t_filler *map, int p);
 void	prep_piece(t_filler *map);
 void 	teststruct(t_filler *data);
 void 	testmap(t_filler *data);

@@ -15,10 +15,19 @@ void save_coords(t_filler *data, int y, int x)
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
     x_reset = x;
-    while (y < y_temp) //scans thru valid piece area to gather data
+    // ft_putstr_fd("coord_y: ", 2);
+    // ft_putnbr_fd(data->coord_y, 2);
+    // ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("coord_x: ", 2);
+    // ft_putnbr_fd(data->coord_x, 2);
+    // ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("sum: ", 2);
+    // ft_putnbr_fd(data->sum, 2);
+    // ft_putchar_fd('\n', 2);
+    while (y < y_temp)
     {
         x = x_reset;
-        while (x < x_temp) //scans thru valid piece area to gather data
+        while (x < x_temp)
         {
             temp_sum = temp_sum + data->heatmap[y][x];
             if (data->heatmap[y][x] == -1)
@@ -36,6 +45,15 @@ void save_coords(t_filler *data, int y, int x)
         data->coord_y = coord_y;
         data->coord_x = coord_x;
     }
+    // ft_putstr_fd("coord_y: ", 2);
+    // ft_putnbr_fd(data->coord_y, 2);
+    // ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("coord_x: ", 2);
+    // ft_putnbr_fd(data->coord_x, 2);
+    // ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("sum: ", 2);
+    // ft_putnbr_fd(data->sum, 2);
+    // ft_putchar_fd('\n', 2);
 }
 
 int scan_piece_area(t_filler *data, int y, int x)
@@ -49,10 +67,10 @@ int scan_piece_area(t_filler *data, int y, int x)
     x_reset = x;
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
-    while (y < y_temp) //scans thru map alongside piece values
+    while (y < y_temp)
     {
         x = x_reset;
-        while (x < x_temp) //scans thru map alongside piece values
+        while (x < x_temp)
         {
             if (data->heatmap[y][x] == -1)
             {
@@ -79,10 +97,10 @@ void place_piece(t_filler *data)
     int count;
 
     y = 0;
-    while (y <= (data->map_y - data->npiece_y)) //scans thru whole playable map
+    while (y <= (data->map_y - data->npiece_y))
     {
         x = 0;
-        while (x <= (data->map_x - data->npiece_x)) //scans thru whole playable map
+        while (x <= (data->map_x - data->npiece_x))
         {
             count = scan_piece_area(data, y, x);
             if (count == 1)

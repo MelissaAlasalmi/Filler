@@ -1,31 +1,20 @@
 #include "filler.h"
 
-int scan_fd(t_filler *data, char *line)
+int scan_fd(t_filler *data, char *line, int p)
 {
 	char **coord;
 	int y;
 
 	coord = NULL;
 	y = 0;
-	if (line && ft_strstr(line, "$$$"))
-	{    
-		ft_putstr_fd("playernum: ", 2);
-    	ft_putnbr_fd(data->playernum, 2);
-    	ft_putchar_fd('\n', 2);
-		data->playernum = ft_atoi(&line[10]);
-		ft_putstr_fd("playernum: ", 2);
-    	ft_putnbr_fd(data->playernum, 2);
-    	ft_putchar_fd('\n', 2);
-	}
-
-	else if (line && ft_strstr(line, "Plateau"))
+	if (line && ft_strstr(line, "Plateau"))
 	{
-		ft_putstr_fd("map_y: ", 2);
-    	ft_putnbr_fd(data->map_y, 2);
-    	ft_putchar_fd('\n', 2);
-	    ft_putstr_fd("map_x: ", 2);
-		ft_putnbr_fd(data->map_x, 2);
-		ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("map_y: ", 2);
+    	// ft_putnbr_fd(data->map_y, 2);
+    	// ft_putchar_fd('\n', 2);
+	    // ft_putstr_fd("map_x: ", 2);
+		// ft_putnbr_fd(data->map_x, 2);
+		// ft_putchar_fd('\n', 2);
 		if (!(coord = ft_strsplit(&line[7], ' ')))
 			return (1);
 		data->map_y = ft_atoi(coord[0]);
@@ -38,12 +27,12 @@ int scan_fd(t_filler *data, char *line)
 				return(1);
 			y++;
 		}
-		ft_putstr_fd("map_y: ", 2);
-    	ft_putnbr_fd(data->map_y, 2);
-    	ft_putchar_fd('\n', 2);
-	    ft_putstr_fd("map_x: ", 2);
-		ft_putnbr_fd(data->map_x, 2);
-		ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("map_y: ", 2);
+    	// ft_putnbr_fd(data->map_y, 2);
+    	// ft_putchar_fd('\n', 2);
+	    // ft_putstr_fd("map_x: ", 2);
+		// ft_putnbr_fd(data->map_x, 2);
+		// ft_putchar_fd('\n', 2);
 		free(coord);
 	}
 	else if (line && line[0] == '0')
@@ -52,20 +41,21 @@ int scan_fd(t_filler *data, char *line)
 		data->m++;
 		if (data->m == data->map_y)
 		{
-			if (construct_map(data) == 1)
+			if (construct_map(data, p) == 1)
 				return (1);
 			data->m = 0;
+			//testmap(data);
 			free_map(data);
 		}
 	}
 	else if (line && ft_strstr(line, "Piece"))
 	{
-		ft_putstr_fd("piece_y: ", 2);
-		ft_putnbr_fd(data->piece_y, 2);
-		ft_putchar_fd('\n', 2);
-		ft_putstr_fd("piece_x: ", 2);
-		ft_putnbr_fd(data->piece_x, 2);
-		ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("piece_y: ", 2);
+		// ft_putnbr_fd(data->piece_y, 2);
+		// ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("piece_x: ", 2);
+		// ft_putnbr_fd(data->piece_x, 2);
+		// ft_putchar_fd('\n', 2);
 		if (!(coord = ft_strsplit(&line[5], ' ')))
 			return (1);
 		data->piece_y = ft_atoi(coord[0]);
@@ -79,43 +69,41 @@ int scan_fd(t_filler *data, char *line)
 			y++;
 		}
 		free(coord);
-	    ft_putstr_fd("piece_y: ", 2);
-		ft_putnbr_fd(data->piece_y, 2);
-		ft_putchar_fd('\n', 2);
-		ft_putstr_fd("piece_x: ", 2);
-		ft_putnbr_fd(data->piece_x, 2);
-		ft_putchar_fd('\n', 2);
+	    // ft_putstr_fd("piece_y: ", 2);
+		// ft_putnbr_fd(data->piece_y, 2);
+		// ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("piece_x: ", 2);
+		// ft_putnbr_fd(data->piece_x, 2);
+		// ft_putchar_fd('\n', 2);
 	}
 	else if (line && (line[0] == '.' || line[0] == '*'))
 	{
-		ft_putstr_fd("data->p: \n", 2);
-		ft_putnbr_fd(data->p, 2);
-		ft_putchar_fd('\n', 2);
-		ft_putstr_fd("data->piece_y: \n", 2);
-		ft_putnbr_fd(data->piece_y, 2);
-		ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("data->p: \n", 2);
+		// ft_putnbr_fd(data->p, 2);
+		// ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("data->piece_y: \n", 2);
+		// ft_putnbr_fd(data->piece_y, 2);
+		// ft_putchar_fd('\n', 2);
 		data->piece[data->p] = ft_strdup(line);
-		ft_putstr_fd("piece: \n", 2);
-		ft_putstr_fd(data->piece[data->p], 2);
-		if (data->p == data->piece_y)
-		{
-			prep_piece(data);
-			place_piece(data);
-			ft_putnbr(data->coord_y - data->y_offset);
-			ft_putchar(' ');
-			ft_putnbr(data->coord_x - data->x_offset);
-			ft_putchar('\n');
-			free_piece(data);
-			data->p = 0;
-		}
 		data->p++;
-		ft_putchar_fd('\n', 2);
-		ft_putstr_fd("data->p: \n", 2);
-		ft_putnbr_fd(data->p, 2);
-		ft_putchar_fd('\n', 2);
-		ft_putstr_fd("data->piece_y: \n", 2);
-		ft_putnbr_fd(data->piece_y, 2);
-		ft_putchar_fd('\n', 2);
+		// ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("data->p: \n", 2);
+		// ft_putnbr_fd(data->p, 2);
+		// ft_putchar_fd('\n', 2);
+		// ft_putstr_fd("data->piece_y: \n", 2);
+		// ft_putnbr_fd(data->piece_y, 2);
+		// ft_putchar_fd('\n', 2);
 	}
-	return(0);
+	if (data->p != 0 && data->p == data->piece_y)
+	{
+		//testpiece(data);
+		prep_piece(data);
+		place_piece(data);
+		ft_putnbr(data->coord_y - data->y_offset);
+		ft_putchar(' ');
+		ft_putnbr(data->coord_x - data->x_offset);
+		ft_putchar('\n');
+		return(2);
+	}
+	return (0);
 }

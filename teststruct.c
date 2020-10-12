@@ -36,10 +36,7 @@ void testheatmap(t_filler *data)
 void testmap(t_filler *data)
 {
     int i;
-    int j;
-
     i = 0;
-    j = 0;
     ft_putstr_fd("map:\n", 2);
     while (i < data->map_y)
     {
@@ -47,16 +44,13 @@ void testmap(t_filler *data)
         ft_putchar_fd('\n', 2);
         i++;
     }
-    i = 0;
 }
 
 void testpiece(t_filler *data)
 {
     int i;
-    int j;
 
     i = 0;
-    j = 0;
     ft_putstr_fd("piece:\n", 2);
     if (data->piece)
     {
@@ -67,40 +61,5 @@ void testpiece(t_filler *data)
             i++;
 
         }
-        i = 0;
     }
-}
-
-void teststruct(t_filler *data)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;  
-
-
-
-
-    ft_putstr_fd("y_offset: ", 2);
-    ft_putnbr_fd(data->y_offset, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("x_offset: ", 2);
-    ft_putnbr_fd(data->x_offset, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("npiece_y: ", 2);
-    ft_putnbr_fd(data->npiece_y, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("npiece_x: ", 2);
-    ft_putnbr_fd(data->npiece_x, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("coord_y: ", 2);
-    ft_putnbr_fd(data->coord_y, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("coord_x: ", 2);
-    ft_putnbr_fd(data->coord_x, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("sum: ", 2);
-    ft_putnbr_fd(data->sum, 2);
-    ft_putchar_fd('\n', 2);
 }
