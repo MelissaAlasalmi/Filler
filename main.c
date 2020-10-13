@@ -19,6 +19,7 @@ t_filler *initialize_struct(void)
 	data->coord_y = 0;
 	data->coord_x = 0;
 	data->sum = 0;
+	data->extra = 0;
 	return (data);
 }
 
@@ -41,15 +42,7 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (line && ft_strstr(line, "$$$"))
-		{    
-			// ft_putstr_fd("playernum: ", 2);
-			// ft_putnbr_fd(p, 2);
-			// ft_putchar_fd('\n', 2);
 			p = ft_atoi(&line[10]);
-			// ft_putstr_fd("playernum: ", 2);
-			// ft_putnbr_fd(p, 2);
-			// ft_putchar_fd('\n', 2);
-		}
 		i = scan_fd(data, line, p);
 		if (i == 1)
 		{

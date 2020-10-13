@@ -95,6 +95,5 @@ int construct_map(t_filler *data, int p)
         y++;
     }
     construct_heatmap(data);
-    //testheatmap(data);
     return (0);
 }

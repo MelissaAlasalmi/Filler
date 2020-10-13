@@ -21,6 +21,7 @@ typedef struct		s_filler
 	int coord_y;
 	int coord_x;
 	int sum;
+	int extra;
 }					t_filler;
 
 int		scan_fd(t_filler *data, char *line, int p);

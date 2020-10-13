@@ -3,38 +3,22 @@
 void save_coords(t_filler *data, int y, int x)
 {
     int temp_sum;
-    int coord_y;
-    int coord_x;
     int y_temp;
     int x_temp;
     int x_reset;
+    int y_reset;
 
     temp_sum = 0;
-    coord_y = 0;
-    coord_x = 0;
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
     x_reset = x;
-    // ft_putstr_fd("coord_y: ", 2);
-    // ft_putnbr_fd(data->coord_y, 2);
-    // ft_putchar_fd('\n', 2);
-    // ft_putstr_fd("coord_x: ", 2);
-    // ft_putnbr_fd(data->coord_x, 2);
-    // ft_putchar_fd('\n', 2);
-    // ft_putstr_fd("sum: ", 2);
-    // ft_putnbr_fd(data->sum, 2);
-    // ft_putchar_fd('\n', 2);
+    y_reset = y;
     while (y < y_temp)
     {
         x = x_reset;
         while (x < x_temp)
         {
             temp_sum = temp_sum + data->heatmap[y][x];
-            if (data->heatmap[y][x] == -1)
-            {
-                coord_y = y;
-                coord_x = x;
-            }
             x++;
         }
         y++;
@@ -42,24 +26,15 @@ void save_coords(t_filler *data, int y, int x)
     if (temp_sum < data->sum || data->sum == 0)
     {
         data->sum = temp_sum;
-        data->coord_y = coord_y;
-        data->coord_x = coord_x;
+        data->coord_y = y_reset;
+        data->coord_x = x_reset;
     }
-    // ft_putstr_fd("coord_y: ", 2);
-    // ft_putnbr_fd(data->coord_y, 2);
-    // ft_putchar_fd('\n', 2);
-    // ft_putstr_fd("coord_x: ", 2);
-    // ft_putnbr_fd(data->coord_x, 2);
-    // ft_putchar_fd('\n', 2);
-    // ft_putstr_fd("sum: ", 2);
-    // ft_putnbr_fd(data->sum, 2);
-    // ft_putchar_fd('\n', 2);
 }
 
 int scan_piece_area(t_filler *data, int y, int x)
 {
-    int count;
-    int x_reset;
+    int count; //counts the number of p1 and p1 occupied coords
+    int x_reset; //keeps track of the current coord from the first loop
     int y_temp;
     int x_temp;
 
@@ -72,7 +47,12 @@ int scan_piece_area(t_filler *data, int y, int x)
         x = x_reset;
         while (x < x_temp)
         {
-            if (data->heatmap[y][x] == -1)
+            if (data->heatmap[y][x] == -1 && x < data->extra)
+            {
+                count = 2;
+                break ;
+            }
+            else if (data->heatmap[y][x] == -1 && x >= data->extra)
             {
                 count++;
                 x++;

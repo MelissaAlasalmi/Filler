@@ -6,61 +6,65 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 13:50:42 by malasalm          #+#    #+#             */
-/*   Updated: 2020/09/06 20:23:45 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/12 22:15:09 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "libft.h"
 
-int	define_line(char **line, const int fd, char **fds)
+int		linejoiner(int fd, char **strs_joiner, char **line, int bytes)
 {
+	int		i;
 	char	*temp;
-	size_t	i;
 
 	i = 0;
-	while (fds[fd][i] != '\n' && fds[fd][i] != '\0')
+	if (bytes < 0)
+		return (-1);
+	while ((strs_joiner[fd][i] != '\0') && (strs_joiner[fd][i] != '\n'))
 		i++;
-	if (fds[fd][i] == '\n')
+	if (strs_joiner[fd][i] == '\n')
 	{
-		*line = ft_strsub(fds[fd], 0, i);
-		temp = ft_strdup(fds[fd] + (i + 1));
-		free(fds[fd]);
-		fds[fd] = temp;
+		*line = ft_strsub(strs_joiner[fd], 0, i);
+		temp = ft_strdup(strs_joiner[fd] + i + 1);
+		ft_strdel(&strs_joiner[fd]);
+		strs_joiner[fd] = temp;
+		return (1);
 	}
-	else if (fds[fd][i] == '\0')
+	else if (strs_joiner[fd][i] == '\0')
 	{
-		*line = ft_strdup(fds[fd]);
-		ft_strdel(&fds[fd]);
+		if (bytes == BUFF_SIZE)
+			return (0);
+		*line = ft_strdup(strs_joiner[fd]);
+		ft_strdel(&strs_joiner[fd]);
 	}
 	return (1);
 }
 
-int	get_next_line(const int fd, char **line)
+int		get_next_line(const int fd, char **line)
 {
 	char		buf[BUFF_SIZE + 1];
-	int			ret;
-	static char	*fds[MAX_FD];
+	static char *sv[MAX_FD];
+	int			bt;
 	char		*temp;
+	int			i;
 
-	if (fd < 0 || line == NULL)
+	i = 0;
+	bt = 0;
+	if ((fd < 0) || (!line) || (read(fd, buf, 0) < 0))
 		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while (!(ft_strchr(sv[fd], '\n')) && ((bt = read(fd, buf, BUFF_SIZE)) > 0))
 	{
-		buf[ret] = '\0';
-		if (fds[fd] != NULL)
-		{
-			temp = fds[fd];
-			fds[fd] = ft_strjoin(fds[fd], buf);
-			free(temp);
-		}
-		if (fds[fd] == NULL)
-			fds[fd] = ft_strdup(buf);
-		if (ft_strchr(fds[fd], '\n'))
+		buf[bt] = '\0';
+		if (sv[fd] == NULL)
+			sv[fd] = ft_strnew(1);
+		temp = ft_strjoin(sv[fd], buf);
+		free(sv[fd]);
+		sv[fd] = temp;
+		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-	if (ret < 0)
-		return (-1);
-	return (ret == 0 && (fds[fd] == NULL || fds[fd][0] == '\0')
-			? 0 : define_line(line, fd, fds));
+	if ((bt == 0 && sv[fd] == NULL) || sv[fd][0] == '\0')
+		return (0);
+	return (linejoiner(fd, sv, line, bt));
 }
