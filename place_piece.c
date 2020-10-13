@@ -29,12 +29,12 @@ void save_coords(t_filler *data, int y, int x)
         data->coord_y = y_reset;
         data->coord_x = x_reset;
     }
-    ft_putstr_fd("coord_y: ", 2);
-    ft_putnbr_fd(data->coord_y, 2);
-    ft_putchar_fd('\n', 2);
-    ft_putstr_fd("coord_x: ", 2);
-    ft_putnbr_fd(data->coord_x, 2);
-    ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("coord_y: ", 2);
+    // ft_putnbr_fd(data->coord_y, 2);
+    // ft_putchar_fd('\n', 2);
+    // ft_putstr_fd("coord_x: ", 2);
+    // ft_putnbr_fd(data->coord_x, 2);
+    // ft_putchar_fd('\n', 2);
 }
 
 int check_valid(t_filler *data, int y, int x, int j, int i)
@@ -42,33 +42,72 @@ int check_valid(t_filler *data, int y, int x, int j, int i)
     int y_temp;
     int x_temp;
     int x_reset;
+    int i_reset;
+    int trap;
 
     y_temp = y + data->npiece_y;
     x_temp = x + data->npiece_x;
     x_reset = x;
-    ft_putstr_fd("in check valid with - ", 2);
-    ft_putnbr_fd(y, 2);
-    ft_putchar_fd(' ', 2);
-    ft_putnbr_fd(x, 2);
-    ft_putchar_fd('\n', 2);
-    while (y < y_temp) // 4 && 6
+    i_reset = i;
+    trap = 0;
+    // ft_putstr_fd("in check valid with - ", 2);
+    // ft_putnbr_fd(y, 2);
+    // ft_putchar_fd(' ', 2);
+    // ft_putnbr_fd(x, 2);
+    // ft_putchar_fd('\n', 2);
+    // testpiece(data);
+    // ft_putstr_fd("in check valid with piece coods - ", 2);
+    // ft_putnbr_fd(j, 2);
+    // ft_putchar_fd(' ', 2);
+    // ft_putnbr_fd(i, 2);
+    // ft_putchar_fd('\n', 2);
+    while (y < y_temp)
     {
         x = x_reset;
-        i = 0;
-        while (x < x_temp) // 9 && 10
+        i = i_reset;
+        while (x < x_temp)
         {
-            ft_putstr_fd("check coord - ", 2);
-            ft_putnbr_fd(y, 2);
-            ft_putchar_fd(' ', 2);
-            ft_putnbr_fd(x, 2);
-            ft_putchar_fd('\n', 2);
+            // ft_putstr_fd("check coord - ", 2);
+            // ft_putnbr_fd(y, 2);
+            // ft_putchar_fd(' ', 2);
+            // ft_putnbr_fd(x, 2);
+            // ft_putchar_fd('\n', 2);
+            if (data->heatmap[y][x] == -2)
+            {
+                // ft_putstr_fd("piece char: ", 2);
+                // ft_putchar_fd(data->piece[j][i], 2);
+                // ft_putchar_fd('\n', 2);
+                // ft_putstr_fd("heatmap #: ", 2);
+                // ft_putnbr_fd(data->heatmap[y][x], 2);
+                // ft_putchar_fd('\n', 2);
+                // ft_putstr_fd("enemy!", 2);
+                // ft_putchar_fd('\n', 2);
+                return(1);
+            }
             if (data->heatmap[y][x] == -1)
             {
                 if(data->piece[j][i] == '.')
                 {
-                    ft_putstr_fd("swing and miss!", 2);
-                    ft_putchar_fd('\n', 2);
-                    return(1); 
+                    // ft_putstr_fd("piece char: ", 2);
+                    // ft_putchar_fd(data->piece[j][i], 2);
+                    // ft_putchar_fd('\n', 2);
+                    // ft_putstr_fd("heatmap #: ", 2);
+                    // ft_putnbr_fd(data->heatmap[y][x], 2);
+                    // ft_putchar_fd('\n', 2);
+                    // ft_putstr_fd("swing and miss!", 2);
+                    // ft_putchar_fd('\n', 2);
+                }
+                else
+                {
+                    // ft_putstr_fd("piece char: ", 2);
+                    // ft_putchar_fd(data->piece[j][i], 2);
+                    // ft_putchar_fd('\n', 2);
+                    // ft_putstr_fd("heatmap #: ", 2);
+                    // ft_putnbr_fd(data->heatmap[y][x], 2);
+                    // ft_putchar_fd('\n', 2);
+                    // ft_putstr_fd("swing and hit!", 2);
+                    // ft_putchar_fd('\n', 2);
+                    trap++;
                 }
             }
             i++;
@@ -77,51 +116,22 @@ int check_valid(t_filler *data, int y, int x, int j, int i)
         y++;
         j++;
     }
-    ft_putstr_fd("swing and hit!", 2);
-    ft_putchar_fd('\n', 2);
-    return(0);
-}
-
-int scan_piece_area(t_filler *data, int y, int x)
-{
-    int count; //counts the number of p1 and p1 occupied coords
-    int x_reset; //keeps track of the current coord from the first loop
-    int y_temp;
-    int x_temp;
-
-    count = 0;
-    x_reset = x;
-    y_temp = y + data->npiece_y;
-    x_temp = x + data->npiece_x;
-    ft_putstr_fd("in scan with - ", 2);
-    ft_putnbr_fd(y, 2);
-    ft_putchar_fd(' ', 2);
-    ft_putnbr_fd(x, 2);
-    ft_putchar_fd('\n', 2);
-    while (y < y_temp)
+    if(trap == 0 || trap > 1)
+        return(1);
+    if (trap == 1)
     {
-        x = x_reset;
-        while (x < x_temp)
-        {
-            if ( data->heatmap[y][x] == -2)
-            {
-                count = 2;
-                break ;
-            }
-            if (data->heatmap[y][x] == -1)
-                count++;
-            x++;
-        }
-        y++;
+        ft_putstr_fd("it fits!", 2);
+        ft_putchar_fd('\n', 2);
     }
-    return(count);
+    return(0);
 }
 
 void place_piece(t_filler *data)
 {
     int y;
     int x;
-    int count;
+    int j;
+    int i;
 
     y = 0;
     while (y <= (data->map_y - data->npiece_y))
@@ -129,14 +139,30 @@ void place_piece(t_filler *data)
         x = 0;
         while (x <= (data->map_x - data->npiece_x))
         {
-            count = scan_piece_area(data, y, x);
-            ft_putstr_fd("count: ", 2);
-            ft_putnbr_fd(count, 2);
-            ft_putchar_fd('\n', 2);
-            if (count == 1)
-            {
-                if (check_valid(data, y, x, data->y_offset, data->x_offset) == 0)
-                    save_coords(data, y, x);
+            j = y;
+            while(j < (y + data->npiece_y))
+            {   
+                i = x;
+                while (i < (x + data->npiece_x))
+                {
+                    if (data->heatmap[j][i] == -1)
+                    {
+                        // ft_putstr_fd("coods of -1 - ", 2);
+                        // ft_putnbr_fd(j, 2);
+                        // ft_putchar_fd(' ', 2);
+                        // ft_putnbr_fd(i, 2);
+                        // ft_putchar_fd('\n', 2);
+                        // ft_putstr_fd("coods to start scan- ", 2);
+                        // ft_putnbr_fd(y, 2);
+                        // ft_putchar_fd(' ', 2);
+                        // ft_putnbr_fd(x, 2);
+                        // ft_putchar_fd('\n', 2);
+                        if (check_valid(data, y, x, data->y_offset, data->x_offset) == 0)
+                            save_coords(data, y, x);
+                    }
+                    i++;
+                }
+                j++;
             }
             x++;
         }
