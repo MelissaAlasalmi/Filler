@@ -69,4 +69,22 @@ void prep_piece(t_filler *data)
         data->extra++;
         x++;
     }
+
+    ft_putstr_fd("y_offset: ", 2);
+    ft_putnbr_fd(data->y_offset, 2);
+    ft_putchar_fd('\n', 2);
+    ft_putstr_fd("x_offset: ", 2);
+    ft_putnbr_fd(data->x_offset, 2);
+    ft_putchar_fd('\n', 2);
+
+    ft_putstr_fd("npiece_y: ", 2);
+    ft_putnbr_fd(data->npiece_y, 2);
+    ft_putchar_fd('\n', 2);
+    ft_putstr_fd("npiece_x: ", 2);
+    ft_putnbr_fd(data->npiece_x, 2);
+    ft_putchar_fd('\n', 2);
+
+    ft_putstr_fd("extra: ", 2);
+    ft_putnbr_fd(data->extra, 2);
+    ft_putchar_fd('\n', 2);
 }
