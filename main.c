@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/13 20:51:53 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/14 17:11:27 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_filler	*initialize_struct(void)
 	data->x_offset = 0;
 	data->npiece_y = 0;
 	data->npiece_x = 0;
+	data->temp_y = 0;
+	data->temp_x = 0;
 	data->coord_y = 0;
 	data->coord_x = 0;
 	data->sum = 0;

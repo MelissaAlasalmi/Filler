@@ -18,6 +18,8 @@ typedef struct		s_filler
     int x_offset;
 	int npiece_y;
 	int npiece_x;
+	int	temp_y;
+	int	temp_x;
 	int coord_y;
 	int coord_x;
 	int sum;
