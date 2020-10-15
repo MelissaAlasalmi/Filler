@@ -20,6 +20,8 @@ typedef struct		s_filler
 	int npiece_x;
 	int	temp_y;
 	int	temp_x;
+	int y_range;
+	int x_range;
 	int coord_y;
 	int coord_x;
 	int sum;
