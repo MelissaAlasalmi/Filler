@@ -8,10 +8,17 @@ void testheatmap(t_filler *data)
     i = 0;
     j = 0;
     ft_putstr_fd("new heatmap:\n", 2);
+    ft_putstr_fd("       0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16\n", 2);
+    ft_putchar_fd('\n', 2);
     if (data->heatmap)
     {
         while (i < data->map_y)
         {
+            ft_putnbr_fd(0, 2);
+            if (i < 10)
+                ft_putnbr_fd(0, 2);
+            ft_putnbr_fd(i, 2);
+            ft_putstr_fd("  ", 2);
             while (j < data->map_x)
             {
                 if (data->heatmap[i][j] < 10)
