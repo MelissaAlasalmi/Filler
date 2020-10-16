@@ -6,13 +6,13 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:56:31 by malasalm          #+#    #+#             */
-/*   Updated: 2020/09/06 20:23:32 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/15 20:32:50 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 8
+# define BUFF_SIZE 1
 # define MAX_FD 4864
 
 # include <unistd.h>

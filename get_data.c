@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/13 21:10:25 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/16 10:20:08 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	find_optimal_coords(t_filler *data)
 	ft_putchar(' ');
 	ft_putnbr(data->coord_x - data->x_offset);
 	ft_putchar('\n');
-	free(data);
+	free_piece(data);
+	free_heatmap(data);
 	return (2);
 }
 
@@ -35,14 +36,10 @@ static int	get_piece_coords(t_filler *data, char *line)
 		return (1);
 	data->piece_y = ft_atoi(coord[0]);
 	data->piece_x = ft_atoi(coord[1]);
-	if (!(data->piece = (char**)malloc(sizeof(char*) * data->piece_y)))
+	if (!(data->piece = (char**)malloc(sizeof(char*) * (data->piece_y + 1))))
 		return (1);
-	while (y < data->piece_y)
-	{
-		if (!(data->piece[y] = (char*)malloc(sizeof(char) * data->piece_x)))
-			return (1);
-		y++;
-	}
+	free(coord[0]);
+	free(coord[1]);
 	free(coord);
 	return (0);
 }
@@ -72,14 +69,10 @@ static int	get_map_coords(t_filler *data, char *line)
 		return (1);
 	data->map_y = ft_atoi(coord[0]);
 	data->map_x = ft_atoi(coord[1]);
-	if (!(data->map = (char**)malloc(sizeof(char*) * data->map_y)))
+	if (!(data->map = (char**)malloc(sizeof(char*) * (data->map_y + 1))))
 		return (1);
-	while (y < data->map_y)
-	{
-		if (!(data->map[y] = (char*)malloc(sizeof(char) * data->map_x)))
-			return (1);
-		y++;
-	}
+	free(coord[0]);
+	free(coord[1]);
 	free(coord);
 	return (0);
 }

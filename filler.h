@@ -29,13 +29,10 @@ typedef struct		s_filler
 }					t_filler;
 
 t_filler	*initialize_struct(void);
+void		re_initialize(t_filler *data);
 int			get_data(t_filler *data, char *line, int p);
 int			construct_map(t_filler *map, int p);
 void		prep_piece(t_filler *map);
-void 		teststruct(t_filler *data);
-void 		testmap(t_filler *data);
-void 		testheatmap(t_filler *data);
-void 		testpiece(t_filler *data);
 void		place_piece(t_filler *data);
 void		free_map(t_filler *data);
 void		free_piece(t_filler *data);
