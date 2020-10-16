@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_uitoabase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malasalm <malasalm@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:38:18 by malasalm          #+#    #+#             */
-/*   Updated: 2020/08/11 13:21:07 by malasalm         ###   ########.fr       */
+/*   Updated: 2020/10/16 14:56:34 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_len(unsigned long long value, int base)
 	return (size);
 }
 
-char	    *ft_uitoabase(unsigned long long value, int base)
+char		*ft_uitoabase(unsigned long long value, int base)
 {
 	char	*str;
 	char	*vals;

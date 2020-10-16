@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/15 13:46:40 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/16 14:46:23 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,15 @@ static int	hit_or_miss(t_filler *data, int y, int j, int hits)
 {
 	int x;
 	int i;
-	int conflicts;
-	
-	conflicts = 0;
+
 	while (y < data->y_range)
 	{
 		x = data->temp_x;
 		i = data->x_offset;
 		while (x < data->x_range)
 		{
-			if (data->heatmap[y][x] == -2)
-			{
-				if (data->piece[j][i] == '*')
-					conflicts = 2;
-			}
+			if (data->heatmap[y][x] == -2 && data->piece[j][i] == '*')
+				return (2);
 			if (data->heatmap[y][x] == -1)
 			{
 				if (data->piece[j][i] == '*')
@@ -63,14 +58,14 @@ static int	hit_or_miss(t_filler *data, int y, int j, int hits)
 		y++;
 		j++;
 	}
-	return (hits + conflicts);
+	return (hits);
 }
 
-static void	check_coords(t_filler *data, int y) //scans map, within playable piece area, coord by coord, for a possible placement
+static void	check_coords(t_filler *data, int y)
 {
 	int x;
 	int result;
-	
+
 	data->y_range = data->temp_y + data->npiece_y;
 	data->x_range = data->temp_x + data->npiece_x;
 	while (y < data->y_range)
@@ -90,7 +85,7 @@ static void	check_coords(t_filler *data, int y) //scans map, within playable pie
 	}
 }
 
-void		place_piece(t_filler *data) //scans map, coord by coord, within playable area
+void		place_piece(t_filler *data)
 {
 	int y;
 	int x;

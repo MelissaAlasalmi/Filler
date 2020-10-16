@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoabase.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malasalm <malasalm@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:38:18 by malasalm          #+#    #+#             */
-/*   Updated: 2020/08/11 13:21:16 by malasalm         ###   ########.fr       */
+/*   Updated: 2020/10/16 14:55:20 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,4 @@ char		*ft_itoabase(long long value, int base)
 	if (neg)
 		str[0] = '-';
 	return (str);
-    }
+}

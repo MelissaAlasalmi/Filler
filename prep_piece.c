@@ -6,19 +6,16 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/13 21:38:17 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/16 13:49:26 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	get_x_offset(t_filler *data, int y, int x)
+void	get_x_offset(t_filler *data, int y, int x, int x_offset)
 {
-	int x_offset;
 	int temp_offset;
 
-	x_offset = data->piece_x;
-	y = y + data->y_offset;
 	while (y < data->piece_y)
 	{
 		x = 0;
@@ -74,7 +71,7 @@ void	prep_piece(t_filler *data)
 	y = 0;
 	x = 0;
 	get_y_offset(data, y, x);
-	get_x_offset(data, y, x);
+	get_x_offset(data, (y + data->y_offset), x, data->piece_x);
 	x = data->x_offset;
 	while (data->piece[data->y_offset][x] == '.')
 	{
