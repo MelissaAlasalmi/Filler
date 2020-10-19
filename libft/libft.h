@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:56:31 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/15 20:32:50 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 08:48:12 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				*ft_itoabase(long long value, int base);
 char				*ft_uitoabase(unsigned long long value, int base);
 int					get_next_line(const int fd, char **line);
+int					ft_abs(int n);
 
 #endif

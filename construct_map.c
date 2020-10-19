@@ -6,17 +6,31 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/16 10:51:23 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:12:02 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static int		ft_abs(int n)
+static void		place_piece_p2(t_filler *data, int ylimit, int xreset)
 {
-	if (n < 0)
-		n = n * -1;
-	return (n);
+	int y;
+	int x;
+	
+	y = 0;
+	while (y <= ylimit)
+	{
+		x = xreset;
+		data->temp_y = y;
+		while (x <= (data->map_x - data->npiece_x))
+		{
+			data->temp_x = x;
+			check_coords(data, data->temp_y);
+			x++;
+		}
+		y++;
+	}
+	data->tempheatmap++;
 }
 
 static int		fill_heatmap(t_filler *data, int row, int column)
@@ -66,7 +80,7 @@ static void		construct_heatmap(t_filler *data)
 	}
 }
 
-static void		convert_data(t_filler *data, int p, int y, int x)
+static void		convert_data(t_filler *data, int y, int x)
 {
 	while (y < data->map_y)
 	{
@@ -77,14 +91,14 @@ static void		convert_data(t_filler *data, int p, int y, int x)
 				data->heatmap[y][x] = 0;
 			if (data->map[y][x] == 'o' || data->map[y][x] == 'O')
 			{
-				if (p == 1)
+				if (data->player == 1)
 					data->heatmap[y][x] = -1;
 				else
 					data->heatmap[y][x] = -2;
 			}
 			if (data->map[y][x] == 'x' || data->map[y][x] == 'X')
 			{
-				if (p == 2)
+				if (data->player == 2)
 					data->heatmap[y][x] = -1;
 				else
 					data->heatmap[y][x] = -2;
@@ -95,7 +109,7 @@ static void		convert_data(t_filler *data, int p, int y, int x)
 	}
 }
 
-int				construct_map(t_filler *data, int p)
+int				construct_map(t_filler *data)
 {
 	int y;
 
@@ -108,7 +122,12 @@ int				construct_map(t_filler *data, int p)
 			return (1);
 		y++;
 	}
-	convert_data(data, p, 0, 0);
+	convert_data(data, 0, 0);
 	construct_heatmap(data);
+	if (data->player == 2)
+	{
+		while(data->tempheatmap < 70)
+			place_piece_p2(data, 20, 26);
+	}
 	return (0);
 }

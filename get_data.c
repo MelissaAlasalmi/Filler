@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/16 10:20:08 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:07:00 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static int	get_piece_coords(t_filler *data, char *line)
 	return (0);
 }
 
-static int	get_map(t_filler *data, char *line, int p)
+static int	get_map(t_filler *data, char *line)
 {
 	data->map[data->m] = ft_strdup(&line[4]);
 	data->m++;
 	if (data->m == data->map_y)
 	{
-		if (construct_map(data, p) == 1)
+		if (construct_map(data) == 1)
 			return (1);
 		data->m = 0;
 		free_map(data);
@@ -77,7 +77,7 @@ static int	get_map_coords(t_filler *data, char *line)
 	return (0);
 }
 
-int			get_data(t_filler *data, char *line, int p)
+int			get_data(t_filler *data, char *line)
 {
 	int i;
 
@@ -85,7 +85,7 @@ int			get_data(t_filler *data, char *line, int p)
 	if (line && ft_strstr(line, "Plateau"))
 		i = get_map_coords(data, line);
 	else if (line[0] == '0')
-		i = get_map(data, line, p);
+		i = get_map(data, line);
 	else if (ft_strstr(line, "Piece"))
 		i = get_piece_coords(data, line);
 	else if (line && (line[0] == '.' || line[0] == '*'))

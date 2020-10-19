@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/16 15:07:01 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:04:32 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void			re_initialize(t_filler *data)
 	data->map_y = 0;
 	data->map_x = 0;
 	data->m = 0;
+	data->tempheatmap = 0;
 	data->piece_y = 0;
 	data->piece_x = 0;
 	data->p = 0;
@@ -51,18 +52,16 @@ int				main(void)
 {
 	t_filler	*data;
 	char		*line;
-	int			p;
 	int			i;
 
 	line = NULL;
-	p = 0;
 	i = 0;
 	data = initialize_struct();
 	while (get_next_line(0, &line) > 0)
 	{
 		if (line && ft_strstr(line, "$$$"))
-			p = ft_atoi(&line[10]);
-		i = get_data(data, line, p);
+			data->player = ft_atoi(&line[10]);
+		i = get_data(data, line);
 		if (i == 1)
 		{
 			free(data);

@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/16 14:46:23 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 19:59:59 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	hit_or_miss(t_filler *data, int y, int j, int hits)
 	return (hits);
 }
 
-static void	check_coords(t_filler *data, int y)
+void		check_coords(t_filler *data, int y)
 {
 	int x;
 	int result;
