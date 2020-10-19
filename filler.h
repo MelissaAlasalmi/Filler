@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/19 20:06:03 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:32:43 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_filler
 	int		map_y;
 	int		map_x;
 	int		m;
-	int 	tempheatmap;
+	int		tempheatmap;
 	char	**piece;
 	int		piece_y;
 	int		piece_x;

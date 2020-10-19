@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/19 20:12:02 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/19 20:32:01 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		place_piece_p2(t_filler *data, int ylimit, int xreset)
 {
 	int y;
 	int x;
-	
+
 	y = 0;
 	while (y <= ylimit)
 	{
@@ -126,7 +126,7 @@ int				construct_map(t_filler *data)
 	construct_heatmap(data);
 	if (data->player == 2)
 	{
-		while(data->tempheatmap < 70)
+		while (data->tempheatmap < 70)
 			place_piece_p2(data, 20, 26);
 	}
 	return (0);
