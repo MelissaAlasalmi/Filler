@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 09:25:17 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 11:25:47 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	find_optimal_coords(t_filler *data)
 	if (data->player == 2)
 	{
 		if (data->map_x < 18)
-			place_piece_p2(data, 15, 12);
-		else if (data->map_x > 18 && data->map_x < 41 && data->tempheatmap < 120)
+			place_piece_p2(data, 13, 10);
+		else if (data->map_x > 18 && data->map_x < 41 && data->index < 120)
 			place_piece_p2(data, 20, 15);
 		else
 			place_piece(data);

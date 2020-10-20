@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 08:46:46 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 11:26:01 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FILLER_H
 # include "libft/libft.h"
 # include <fcntl.h>
-
 
 typedef struct	s_filler
 {
@@ -29,7 +28,7 @@ typedef struct	s_filler
 	int		piece_y;
 	int		piece_x;
 	int		p;
-	int		tempheatmap;
+	int		index;
 	int		y_offset;
 	int		x_offset;
 	int		npiece_y;

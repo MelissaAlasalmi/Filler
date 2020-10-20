@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 08:48:32 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 11:26:41 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void			re_initialize(t_filler *data)
 t_filler		*initialize_struct(void)
 {
 	t_filler *data;
+
 	if (!(data = (t_filler *)malloc(sizeof(t_filler))))
 		return (NULL);
 	data->map = NULL;
