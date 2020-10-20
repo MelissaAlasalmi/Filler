@@ -6,32 +6,11 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/19 20:37:12 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 07:57:01 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-static void		place_piece_p2(t_filler *data, int ylimit, int xreset)
-{
-	int y;
-	int x;
-
-	y = 0;
-	while (y <= ylimit)
-	{
-		x = xreset;
-		data->temp_y = y;
-		while (x <= (data->map_x - data->npiece_x))
-		{
-			data->temp_x = x;
-			check_coords(data, data->temp_y);
-			x++;
-		}
-		y++;
-	}
-	data->tempheatmap++;
-}
 
 static int		fill_heatmap(t_filler *data, int row, int column)
 {
@@ -124,18 +103,5 @@ int				construct_map(t_filler *data)
 	}
 	convert_data(data, 0, 0);
 	construct_heatmap(data);
-	if (data->player == 2)
-	{
-		if (data->map_x < 18)
-		{
-			while (data->tempheatmap < 20)
-				place_piece_p2(data, 15, 10);
-		}
-		else
-		{
-			while (data->tempheatmap < 70)
-				place_piece_p2(data, 20, 26);
-		}
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/19 20:04:32 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 08:48:32 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void			re_initialize(t_filler *data)
 	data->map_y = 0;
 	data->map_x = 0;
 	data->m = 0;
-	data->tempheatmap = 0;
 	data->piece_y = 0;
 	data->piece_x = 0;
 	data->p = 0;
@@ -38,7 +37,6 @@ void			re_initialize(t_filler *data)
 t_filler		*initialize_struct(void)
 {
 	t_filler *data;
-
 	if (!(data = (t_filler *)malloc(sizeof(t_filler))))
 		return (NULL);
 	data->map = NULL;

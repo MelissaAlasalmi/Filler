@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/19 19:59:59 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/10/20 08:59:00 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,27 @@ void		place_piece(t_filler *data)
 		}
 		y++;
 	}
+}
+
+void		place_piece_p2(t_filler *data, int ylimit, int xreset)
+{
+	int y;
+	int x;
+
+	y = 0;
+	while (y <= (ylimit - data->npiece_y))
+	{
+		x = xreset;
+		data->temp_y = y;
+		while (x <= (data->map_x - data->npiece_x))
+		{
+			data->temp_x = x;
+			check_coords(data, data->temp_y);
+			if (data->coord_y == 0 && data->coord_x ==0)
+				place_piece(data);
+			x++;
+		}
+		y++;
+	}
+	data->tempheatmap++;
 }
