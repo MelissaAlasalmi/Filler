@@ -5,3 +5,4 @@ Filler is a two-player algorithmic game. Your aim is to build an algorithm that 
 ![FillerRound](./RMSrcs/FillerRound.png)
 ![FillerHeatmap](./RMSrcs/FillerHeatmap.png)
 ![FillerPlacement](./RMSrcs/FillerPlacement.png)
+![FillerResult](./RMSrcs/Result.png)
