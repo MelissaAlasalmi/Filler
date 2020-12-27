@@ -12,3 +12,6 @@ Thanks to the awesome visualizer built by [avocadohooman](https://github.com/avo
 ![MalasalmVSCarli](./RMSrcs/MvsC.gif)  
 And how it looks when my program goes up against SuperJeannot (also found in the resources directory):  
 ![MalasalmVSCarli](./RMSrcs/MvsSJ.gif)  
+
+## How to use it:
+
