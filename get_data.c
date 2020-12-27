@@ -6,12 +6,17 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/12/27 01:12:07 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/12/27 12:24:41 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
+/* 
+* "Prepares" the piece for placement by handling the offsets of the piece, if any,
+* then calls the place_piece function to find the optimal coordinates to place the
+* piece on the map
+*/
 static int	find_optimal_coords(t_filler *data)
 {
 	prep_piece(data);
@@ -37,7 +42,7 @@ static int	find_optimal_coords(t_filler *data)
 
 /* 
 * Analyses the data received from get_data and stores it into the piece 
-* coordnate variables of the struct. Also allocates space for the piece
+* coordinate variables of the struct. Also allocates space for the piece
 * array.
 */
 static int	get_piece_coords(t_filler *data, char *line)
@@ -61,7 +66,8 @@ static int	get_piece_coords(t_filler *data, char *line)
 
 /* 
 * Analyses the data received from get_data and stores it into the map 
-* array of the struct. 
+* array of the struct. Also calls construct_map to generate a heatmap
+* based on the data of the map.
 */
 static int	get_map(t_filler *data, char *line)
 {
@@ -79,7 +85,7 @@ static int	get_map(t_filler *data, char *line)
 
 /* 
 * Analyses the data received from get_data and stores it into the map 
-* coordnate variables of the struct. 
+* coordinate variables of the struct. 
 */
 static int	get_map_coords(t_filler *data, char *line)
 {

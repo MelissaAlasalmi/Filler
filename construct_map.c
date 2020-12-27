@@ -6,12 +6,17 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 07:57:01 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/12/27 12:21:42 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
+/* 
+* For each coordinate in the base of the heatmap that has '0' value, a new int 
+* value is assigned to it based on its relative position to the nearest 
+* opponent-owned coordinate.
+*/
 static int		fill_heatmap(t_filler *data, int row, int column)
 {
 	int y;
@@ -59,6 +64,12 @@ static void		construct_heatmap(t_filler *data)
 	}
 }
 
+/* 
+* Converts the data from the map into the base of the heatmap: '.' becomes
+* '0', and letters 'o', 'O', 'x' and 'X' become either '-1' or '-2'. 
+* '-1' is always used to represent the programs' pieces on the map, and 
+* '-2' is always used to represent the opponents' pieces on the map.
+*/
 static void		convert_data(t_filler *data, int y, int x)
 {
 	while (y < data->map_y)
