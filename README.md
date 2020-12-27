@@ -14,4 +14,8 @@ And how it looks when my program goes up against SuperJeannot (also found in the
 ![MalasalmVSCarli](./RMSrcs/MvsSJ.gif)  
 
 ## How to use it:
+Clone the repo, go to the resources directory, and run the following command:
+```
+./filler_vm -f maps/{map} -p1 ../malasalm.filler -p2 players/{opponent}
+```
 
