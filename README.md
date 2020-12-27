@@ -8,4 +8,7 @@ After the first round of the game, to place a new piece, there are several optio
 ![FillerPlacement](./RMSrcs/FillerPlacement.png)  
 Once the program finds a "sub-map" area where it can place a piece successfully, it stores the coordinate-combo of the top-left corner of the "sub-map" area, then it continues to scan all the remaining "sub-map" areas until it has exhausted all its options. Whenever it finds another viable position, it compares it to the saved coordinate-combo by using sums - the smallest sum suggesting a more optimal area on the map to place the piece!  
 ![FillerResult](./RMSrcs/Result.png)  
-Here's how it looks when my program goes up against Carli (an opponent player found in the resources directory):  
+Thanks to the awesome visualizer built by [avocadohooman](https://github.com/avocadohooman/42-filler), here's how it looks when my program goes up against Carli (an opponent player found in the resources directory):  
+![MalasalmVSCarli](./RMSrcs/MvsC.gif)  
+And how it looks when my program goes up against SuperJeannot (also found in the resources directory):  
+![MalasalmVSCarli](./RMSrcs/MvsSJ.gif)  
