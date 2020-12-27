@@ -6,12 +6,17 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 11:26:41 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/12/27 00:48:12 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
+/* 
+* Initializes the int-type variables separately. They are handled on their own
+* primarily because they need to be "refreshed" after each turn, and therefore,
+* this function is also called when get_data returns 2.
+*/
 void			re_initialize(t_filler *data)
 {
 	data->map_y = 0;
@@ -34,6 +39,11 @@ void			re_initialize(t_filler *data)
 	data->extra = 0;
 }
 
+/* 
+* This initialization only happens when the program starts. It creates the 
+* programs' struct and initializes the array variables to NULL, then it calls
+* re_initialize to handle the rest...
+*/
 t_filler		*initialize_struct(void)
 {
 	t_filler *data;
@@ -47,6 +57,14 @@ t_filler		*initialize_struct(void)
 	return (data);
 }
 
+/* 
+* Initializes the data struct and uses the get_net_line function to 
+* read (from the standard input) data from the filler VM. As long as 
+* the filler VM provides data, the game is still ongoing. The get_data
+* function returns 1 if there is an error, or 2 if the data (per round) 
+* was read and stored successfully, and therefore, when my program has 
+* successfully placed a piece against its opponent.
+*/
 int				main(void)
 {
 	t_filler	*data;

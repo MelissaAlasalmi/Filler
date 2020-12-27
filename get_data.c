@@ -6,7 +6,7 @@
 /*   By: Melissa <Melissa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:33:23 by malasalm          #+#    #+#             */
-/*   Updated: 2020/10/20 11:25:47 by Melissa          ###   ########.fr       */
+/*   Updated: 2020/12/27 01:12:07 by Melissa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static int	find_optimal_coords(t_filler *data)
 	return (2);
 }
 
+/* 
+* Analyses the data received from get_data and stores it into the piece 
+* coordnate variables of the struct. Also allocates space for the piece
+* array.
+*/
 static int	get_piece_coords(t_filler *data, char *line)
 {
 	char	**coord;
@@ -54,6 +59,10 @@ static int	get_piece_coords(t_filler *data, char *line)
 	return (0);
 }
 
+/* 
+* Analyses the data received from get_data and stores it into the map 
+* array of the struct. 
+*/
 static int	get_map(t_filler *data, char *line)
 {
 	data->map[data->m] = ft_strdup(&line[4]);
@@ -68,6 +77,10 @@ static int	get_map(t_filler *data, char *line)
 	return (0);
 }
 
+/* 
+* Analyses the data received from get_data and stores it into the map 
+* coordnate variables of the struct. 
+*/
 static int	get_map_coords(t_filler *data, char *line)
 {
 	char	**coord;
@@ -87,6 +100,13 @@ static int	get_map_coords(t_filler *data, char *line)
 	return (0);
 }
 
+/* 
+* Analyses the data received from get_next_line and sends it to the appropriate
+* function for storage (get_map_coords, get_map, or get_piece_coords) or stores it 
+* directly into the piece array if it does not meet the criteria for any of the 
+* storage functions. Once the last line of the piece is stored, the 
+* find_optimal_coords function fires up the algorithm! 
+*/
 int			get_data(t_filler *data, char *line)
 {
 	int i;
